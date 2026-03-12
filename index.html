@@ -1,0 +1,1398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big Red Education</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Clash+Display:wght@500;600;700&display=swap");
+
+    :root {
+      --bg: #081a34;
+      --bg-deep: #050d1d;
+      --panel: #f6d9de;
+      --panel-soft: #fdecef;
+      --ink: #1e1d40;
+      --muted: #655f72;
+      --red: #d90d32;
+      --navy: #1e1d40;
+      --blue: #1b65a6;
+      --sky: #4ab0d9;
+      --lime: #d9e46b;
+      --line-dark: rgba(255, 255, 255, 0.1);
+      --line-light: rgba(30, 29, 64, 0.12);
+      --shadow-dark: 0 24px 80px rgba(0, 0, 0, 0.24);
+      --shadow-light: 0 22px 60px rgba(30, 29, 64, 0.16);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --container: 1260px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: #f4efe9;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(74, 176, 217, 0.20), transparent 22%),
+        radial-gradient(circle at 90% 10%, rgba(27, 101, 166, 0.16), transparent 22%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 52%, #10264a 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black 42%, transparent 90%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 28px), var(--container));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 26, 52, 0.74);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .header-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #fff9f2;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      box-shadow: 0 12px 26px rgba(27, 101, 166, 0.28);
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+      color: rgba(255, 234, 238, 0.78);
+      font-size: 0.94rem;
+    }
+
+    .nav a:hover {
+      color: #fff9f2;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.9rem 1.2rem;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      color: var(--ink);
+      background: var(--lime);
+      box-shadow: 0 16px 34px rgba(217, 228, 107, 0.18);
+      font-weight: 800;
+    }
+
+    .button-secondary {
+      color: #fff8ef;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .section {
+      padding: 36px 0;
+    }
+
+    .hero {
+      padding-top: 26px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      padding: 26px 8px 14px 2px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.46rem 0.84rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #eaf7ff;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sky);
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-family: "Clash Display", sans-serif;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-title {
+      margin-top: 18px;
+      display: grid;
+      gap: 4px;
+      max-width: 9ch;
+    }
+
+    .hero-kicker {
+      font-size: clamp(1.05rem, 1.8vw, 1.28rem);
+      color: rgba(255, 235, 239, 0.88);
+      line-height: 1.3;
+    }
+
+    .hero-kicker strong {
+      color: #fff9f2;
+    }
+
+    .hero-standout {
+      font-size: clamp(3.1rem, 5.7vw, 5.6rem);
+      line-height: 0.92;
+      color: #fff9f2;
+    }
+
+    .hero-subcopy {
+      font-size: clamp(1.5rem, 2.5vw, 2.3rem);
+      line-height: 1.05;
+      color: rgba(255, 228, 235, 0.84);
+    }
+
+    .hero-summary {
+      margin-top: 18px;
+      max-width: 54ch;
+      color: rgba(255, 225, 232, 0.76);
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 18px;
+      margin-top: 18px;
+      color: #eff7fb;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.96rem;
+      color: rgba(255, 236, 240, 0.90);
+    }
+
+    .hero-meta span::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid var(--sky);
+      box-shadow: 0 0 0 4px rgba(74, 176, 217, 0.12);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-stat {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-stat strong {
+      display: block;
+      color: #fff8ef;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .hero-stat span {
+      color: rgba(255, 226, 232, 0.76);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .hero-media {
+      position: relative;
+      min-height: 520px;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line-dark);
+      box-shadow: var(--shadow-dark);
+      background:
+        linear-gradient(180deg, rgba(11, 24, 31, 0.14), rgba(11, 24, 31, 0.22)),
+        #1e1d40;
+    }
+
+    .hero-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-media-link {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .hero-media::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(4, 22, 27, 0.54), transparent 48%),
+        linear-gradient(180deg, rgba(4, 22, 27, 0.05), rgba(4, 22, 27, 0.18));
+    }
+
+    .hero-quote {
+      position: absolute;
+      left: 26px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      max-width: 340px;
+    }
+
+    .hero-quote span {
+      display: inline-block;
+      margin-bottom: 7px;
+      padding: 0.1em 0.24em;
+      background: rgba(4, 22, 27, 0.94);
+      color: #fff8ef;
+      font-size: clamp(1.7rem, 3.1vw, 3.4rem);
+      line-height: 1.02;
+    }
+
+    .play-chip {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.94);
+      color: #08161b;
+      font-size: 1.5rem;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .speaker-card,
+    .video-chip {
+      position: absolute;
+      z-index: 3;
+      border-radius: 18px;
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff8ef;
+    }
+
+    .video-chip {
+      left: 20px;
+      bottom: 20px;
+      padding: 0.75rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(57, 149, 108, 0.88);
+      font-weight: 700;
+    }
+
+    .speaker-card {
+      right: 20px;
+      bottom: 20px;
+      min-width: 220px;
+      padding: 0.95rem 1.05rem;
+      background: rgba(30, 29, 64, 0.62);
+    }
+
+    .speaker-card strong {
+      display: block;
+      font-size: 1.18rem;
+      margin-bottom: 4px;
+    }
+
+    .speaker-card span {
+      color: rgba(255, 232, 236, 0.82);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    .section-head p {
+      max-width: 58ch;
+      color: rgba(255, 226, 232, 0.76);
+      line-height: 1.7;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      color: #fff8ef;
+      line-height: 0.96;
+    }
+
+    .light-panel {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-light);
+      color: var(--ink);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .light-pill {
+      padding: 0.52rem 0.78rem;
+      border-radius: 999px;
+      background: rgba(30, 29, 64, 0.06);
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .cred-panel {
+      padding: 26px;
+    }
+
+    .cred-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .cred-copy p {
+      margin-top: 14px;
+      color: var(--muted);
+      max-width: 54ch;
+    }
+
+    .cred-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .metric-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid var(--line-light);
+    }
+
+    .metric-card strong {
+      display: block;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.9rem;
+      margin-bottom: 6px;
+    }
+
+    .metric-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .cred-visual {
+      position: relative;
+      min-height: 280px;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(74, 176, 217, 0.18), transparent 20%),
+        linear-gradient(180deg, #1e1d40, #1b65a6);
+    }
+
+    .cred-visual::before {
+      content: "";
+      position: absolute;
+      top: 18%;
+      right: 16%;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: #f1d4ba;
+    }
+
+    .cred-visual::after {
+      content: "";
+      position: absolute;
+      right: 8%;
+      bottom: -4%;
+      width: 48%;
+      height: 72%;
+      border-radius: 42% 42% 12% 12%;
+      background: #edf2f7;
+    }
+
+    .workshop-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .spotlight {
+      padding: 28px;
+      min-height: 330px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .spotlight p {
+      color: var(--muted);
+      margin-top: 14px;
+      line-height: 1.7;
+    }
+
+    .spotlight-media {
+      min-height: 240px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top left, rgba(217, 13, 50, 0.16), transparent 22%),
+        linear-gradient(180deg, #d7ebf5, #f6e7da);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spotlight-media::before {
+      content: "";
+      position: absolute;
+      top: 16%;
+      left: 50%;
+      width: 84px;
+      height: 84px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #d1a481;
+    }
+
+    .spotlight-media::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -6%;
+      width: 66%;
+      height: 72%;
+      transform: translateX(-50%);
+      border-radius: 38% 38% 10% 10%;
+      background: #f8fbff;
+    }
+
+    .workshop-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: var(--panel-soft);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      color: var(--ink);
+      box-shadow: var(--shadow-light);
+    }
+
+    .mini-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 8px;
+    }
+
+    .mini-card p {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .mentor-section {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mentor-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .mentor-card {
+      padding: 16px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(252, 231, 236, 0.98), rgba(247, 220, 227, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: var(--shadow-light);
+      color: var(--ink);
+    }
+
+    .mentor-portrait {
+      height: 150px;
+      border-radius: 18px;
+      margin-bottom: 14px;
+      background: linear-gradient(180deg, #1b65a6, #4ab0d9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mentor-portrait::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      width: 56px;
+      height: 56px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #d8b08f;
+    }
+
+    .mentor-portrait::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      width: 74%;
+      height: 68%;
+      transform: translateX(-50%);
+      border-radius: 42% 42% 10% 10%;
+      background: #20365e;
+    }
+
+    .mentor-tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 0.38rem 0.68rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: rgba(217, 13, 50, 0.1);
+      color: var(--red);
+    }
+
+    .mentor-card h3 {
+      font-size: 1.04rem;
+      margin-bottom: 6px;
+    }
+
+    .mentor-card p {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.9rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+    }
+
+    .story-card {
+      padding: 28px;
+      min-height: 300px;
+    }
+
+    .story-card p {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .quote-card {
+      background:
+        radial-gradient(circle at top right, rgba(74, 176, 217, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(252, 232, 236, 0.98), rgba(246, 217, 224, 0.96));
+    }
+
+    .quote-mark {
+      font-size: 4rem;
+      line-height: 1;
+      color: rgba(27, 101, 166, 0.18);
+    }
+
+    .quote-text {
+      margin-top: 10px;
+      font-family: "Clash Display", sans-serif;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      line-height: 1.55;
+      max-width: 34ch;
+      color: var(--ink);
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #f1d0b2, #d9a372);
+      position: relative;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .avatar::after {
+      content: "";
+      position: absolute;
+      inset: 42% 10% 0;
+      border-radius: 50% 50% 14% 14%;
+      background: #1f2642;
+    }
+
+    .path-panel {
+      padding: 28px;
+    }
+
+    .step-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid var(--line-light);
+      color: var(--ink);
+    }
+
+    .step-index {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .step h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 0.84fr 1.16fr;
+      gap: 18px;
+    }
+
+    .faq-intro,
+    .faq-item {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: var(--shadow-light);
+      color: var(--ink);
+    }
+
+    .faq-intro {
+      padding: 26px;
+      border-radius: var(--radius-xl);
+    }
+
+    .faq-intro p {
+      margin-top: 14px;
+      color: var(--muted);
+    }
+
+    .faq-item {
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .faq-item + .faq-item {
+      margin-top: 12px;
+    }
+
+    .faq-item button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 20px 22px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 220ms ease;
+      padding: 0 22px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 180px;
+      padding-bottom: 18px;
+    }
+
+    .footer {
+      padding: 24px 0 48px;
+    }
+
+    .footer-card {
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at top right, rgba(74, 176, 217, 0.12), transparent 26%),
+        linear-gradient(180deg, rgba(251, 228, 234, 0.96), rgba(246, 217, 224, 0.94));
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: var(--shadow-light);
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .footer-card p {
+      color: var(--muted);
+      margin-top: 12px;
+      max-width: 56ch;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 650ms ease, transform 650ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .cred-grid,
+      .workshop-grid,
+      .story-grid,
+      .faq-grid,
+      .footer-card {
+        grid-template-columns: 1fr;
+      }
+
+      .mentor-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .step-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 780px) {
+      .nav,
+      .header-actions .button-secondary {
+        display: none;
+      }
+
+      .section {
+        padding: 24px 0;
+      }
+
+      .container {
+        width: min(calc(100% - 18px), var(--container));
+      }
+
+      .hero-grid,
+      .hero-strip,
+      .cred-metrics,
+      .mentor-grid,
+      .step-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .hero-media {
+        min-height: 400px;
+      }
+
+      .hero-quote {
+        left: 18px;
+        max-width: 260px;
+      }
+
+      .speaker-card {
+        right: 14px;
+        bottom: 14px;
+        min-width: 160px;
+      }
+
+      .video-chip {
+        left: 14px;
+        bottom: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Big Red Education home">
+        <span class="brand-mark">B</span>
+        <span>Big Red Education</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#why-bre">Why BRE</a>
+        <a href="#workshops">Workshops</a>
+        <a href="#mentors">Mentors</a>
+        <a href="#journey">Journey</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button button-secondary" href="#why-bre">Explore</a>
+        <a class="button button-primary" href="https://bigrededucation.com/" target="_blank" rel="noopener noreferrer">Visit Big Red</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">Big Red Education</div>
+          <h1 class="hero-title">
+            <span class="hero-kicker">With <strong>Big Red Education</strong>, YOU will</span>
+            <span class="hero-standout">STAND-OUT.</span>
+            <span class="hero-subcopy">By learning what actually counts.</span>
+          </h1>
+          <p class="hero-summary">
+            Big Red Education positions itself around high-impact workshops, global mentorship, and student-first experiences.
+            This version uses Big Red content inside a darker, denser, Mesa-inspired landing page system.
+          </p>
+          <div class="hero-meta">
+            <span>Workshop-led learning</span>
+            <span>Global mentors</span>
+            <span>High school students</span>
+            <span>Summer experiences</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#workshops">Explore workshops</a>
+            <a class="button button-secondary" href="https://bigrededucation.com/about/" target="_blank" rel="noopener noreferrer">About Big Red</a>
+          </div>
+          <div class="hero-strip">
+            <div class="hero-stat">
+              <strong>Public Speaking</strong>
+              <span>Communication and confidence building through live practice.</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Design Thinking</strong>
+              <span>Creative problem-solving and structured student collaboration.</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Leadership & Social Innovation</strong>
+              <span>Leadership, empathy, impact, and initiative-led learning.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-media reveal">
+          <img src="https://i.ytimg.com/vi/Hi-7KVBvkMo/maxresdefault.jpg" alt="Big Red Education video preview">
+          <a class="hero-media-link" href="https://www.youtube.com/watch?v=Hi-7KVBvkMo" target="_blank" rel="noopener noreferrer" aria-label="Open Big Red Education video on YouTube"></a>
+          <div class="play-chip" aria-hidden="true">▶</div>
+          <div class="hero-quote">
+            <span>Students need</span><br>
+            <span>confidence,</span><br>
+            <span>not just</span><br>
+            <span>credentials</span>
+          </div>
+          <div class="video-chip">2 min</div>
+          <div class="speaker-card">
+            <strong>Big Red Team</strong>
+            <span>Mentors, educators, and student coaches</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why-bre">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Why BRE</div>
+            <h2>Learning experiences that go beyond classroom performance.</h2>
+          </div>
+          <p>
+            Big Red describes itself around confidence, global exposure, mentorship, and meaningful student growth.
+            This section turns that positioning into a premium content block instead of a flat feature list.
+          </p>
+        </div>
+
+        <div class="light-panel cred-panel reveal">
+          <div class="cred-grid">
+            <div class="cred-copy">
+              <h3 style="font-size:clamp(1.8rem,3vw,2.8rem); line-height:1;">Developing a future generation of globally-minded leaders.</h3>
+              <p>
+                Big Red Education focuses on workshops, programs, and conferences built for leadership, social innovation,
+                public speaking, entrepreneurship, and experiential learning.
+              </p>
+              <div class="pill-row">
+                <div class="light-pill">Student-first learning</div>
+                <div class="light-pill">Workshops & conferences</div>
+                <div class="light-pill">Global mentor network</div>
+                <div class="light-pill">Future-ready skills</div>
+              </div>
+              <div class="cred-metrics">
+                <div class="metric-card">
+                  <strong>Workshops</strong>
+                  <span>Hands-on learning formats that push discussion, presentation, and thinking.</span>
+                </div>
+                <div class="metric-card">
+                  <strong>Programs</strong>
+                  <span>Structured experiences designed around real student growth and exploration.</span>
+                </div>
+                <div class="metric-card">
+                  <strong>Conferences</strong>
+                  <span>Signature events that extend Big Red’s learning model beyond the classroom.</span>
+                </div>
+              </div>
+            </div>
+            <div class="cred-visual" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workshops">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Workshops & Events</div>
+            <h2>Current experiences from Big Red Education.</h2>
+          </div>
+          <p>
+            Content here is based on Big Red Education’s live workshop and event pages, including the Leadership & Social Innovation Conference,
+            Ivy League MUNC ’26, InnovateNOW, Social Startup Bootcamp, and Command Z: Future Tech Lab.
+          </p>
+        </div>
+
+        <div class="workshop-grid">
+          <article class="light-panel spotlight reveal">
+            <div>
+              <div class="eyebrow" style="background:rgba(217,13,50,0.08); color:var(--red); border-color:rgba(217,13,50,0.12);">Featured Conference</div>
+              <h3 style="font-size:clamp(1.9rem,3vw,2.8rem); line-height:1; color:var(--ink); margin-top:16px;">Leadership &amp; Social Innovation Conference</h3>
+              <p>
+                Big Red’s conference programming is positioned around leadership, social innovation, and meaningful student interaction.
+                It reflects the site’s emphasis on stronger student voice, action, and perspective.
+              </p>
+              <div class="pill-row">
+                <div class="light-pill">Leadership</div>
+                <div class="light-pill">Social impact</div>
+                <div class="light-pill">Conference format</div>
+              </div>
+            </div>
+            <div class="spotlight-media" aria-hidden="true"></div>
+          </article>
+
+          <div class="workshop-list">
+            <article class="mini-card reveal">
+              <h3>Ivy League MUNC ’26</h3>
+              <p>Model UN style exposure built for students interested in diplomacy, global thinking, and debate-led confidence.</p>
+            </article>
+            <article class="mini-card reveal">
+              <h3>InnovateNOW</h3>
+              <p>An innovation-oriented experience designed to help students think creatively and solve problems with structure.</p>
+            </article>
+            <article class="mini-card reveal">
+              <h3>Social Startup Bootcamp</h3>
+              <p>Entrepreneurship and impact-driven thinking for students exploring ideas, initiative, and social change.</p>
+            </article>
+            <article class="mini-card reveal">
+              <h3>Command Z: Future Tech Lab</h3>
+              <p>A future-facing tech experience oriented around curiosity, experimentation, and applied learning.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mentors">
+      <div class="container mentor-section">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Mentors</div>
+            <h2>People that make the experience feel personal.</h2>
+          </div>
+          <p>
+            Big Red Education’s live content repeatedly emphasizes mentorship, student coaching, and guided growth.
+            These cards translate that into a more editorial mentor system.
+          </p>
+        </div>
+
+        <div class="mentor-grid">
+          <article class="mentor-card reveal">
+            <div class="mentor-portrait"></div>
+            <div class="mentor-tag">Communication</div>
+            <h3>Eileen Matthews</h3>
+            <p>Supports clearer expression, stronger writing, and student confidence.</p>
+          </article>
+          <article class="mentor-card reveal">
+            <div class="mentor-portrait"></div>
+            <div class="mentor-tag">Public speaking</div>
+            <h3>Alexis “Lexi” Friedman</h3>
+            <p>Helps students build voice, stage presence, and persuasive speaking skills.</p>
+          </article>
+          <article class="mentor-card reveal">
+            <div class="mentor-portrait"></div>
+            <div class="mentor-tag">Social innovation</div>
+            <h3>Tanner Pruzinsky</h3>
+            <p>Guides leadership, initiative, and impact-centered student thinking.</p>
+          </article>
+          <article class="mentor-card reveal">
+            <div class="mentor-portrait"></div>
+            <div class="mentor-tag">Leadership</div>
+            <h3>John Austin</h3>
+            <p>Focused on collaboration, participation, and stronger student ownership.</p>
+          </article>
+          <article class="mentor-card reveal">
+            <div class="mentor-portrait"></div>
+            <div class="mentor-tag">Student growth</div>
+            <h3>Katie Austin</h3>
+            <p>Supports student development through workshop practice and guided reflection.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container story-grid">
+        <article class="light-panel story-card reveal">
+          <div class="eyebrow">Student perspective</div>
+          <h2 style="margin-top:16px; font-size:clamp(2rem,3vw,3rem); color:var(--ink);">Built for students who want to do more than collect certificates.</h2>
+          <p>
+            Big Red’s messaging consistently frames its offerings as richer experiences that help students grow as communicators,
+            leaders, problem-solvers, and globally aware participants.
+          </p>
+          <div class="pill-row">
+            <div class="light-pill">Global mindset</div>
+            <div class="light-pill">Leadership exposure</div>
+            <div class="light-pill">Practical confidence</div>
+          </div>
+        </article>
+
+        <article class="light-panel story-card quote-card reveal">
+          <div class="quote-mark">“</div>
+          <div class="quote-text" id="testimonialText">
+            Big Red Education workshops are designed to help students stand out through confidence, communication, and stronger self-expression.
+          </div>
+          <div class="person">
+            <div class="avatar"></div>
+            <div>
+              <strong id="testimonialName">Big Red Student</strong><br>
+              <span id="testimonialRole" style="color:var(--muted);">Workshop participant</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="journey">
+      <div class="container">
+        <article class="light-panel path-panel reveal">
+          <div class="section-head" style="margin-bottom:0;">
+            <div>
+              <div class="eyebrow">How it works</div>
+              <h2 style="color:var(--ink);">A clearer path from curiosity to confidence.</h2>
+            </div>
+            <p style="color:var(--muted);">
+              This section restructures Big Red’s positioning into a student journey: discover the format, choose an experience, participate live,
+              and leave with stronger voice and perspective.
+            </p>
+          </div>
+          <div class="step-grid">
+            <div class="step">
+              <div class="step-index">1</div>
+              <h3>Discover</h3>
+              <p>Students explore workshops, conferences, and programs matched to their interests.</p>
+            </div>
+            <div class="step">
+              <div class="step-index">2</div>
+              <h3>Choose</h3>
+              <p>They pick the learning format that fits leadership, innovation, speaking, or impact.</p>
+            </div>
+            <div class="step">
+              <div class="step-index">3</div>
+              <h3>Participate</h3>
+              <p>They join live sessions built around student discussion, feedback, and active experience.</p>
+            </div>
+            <div class="step">
+              <div class="step-index">4</div>
+              <h3>Stand Out</h3>
+              <p>They leave with stronger communication, initiative, and stories that actually matter.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container faq-grid">
+        <article class="faq-intro reveal">
+          <div class="eyebrow" style="color:var(--ink); background:rgba(30,29,64,0.06); border-color:rgba(30,29,64,0.1);">FAQ</div>
+          <h2 style="margin-top:16px; color:var(--ink);">Clear answers for students and families.</h2>
+          <p>Use this section as the practical close: who Big Red is for, what the experiences are about, and how the programs are framed.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://bigrededucation.com/" target="_blank" rel="noopener noreferrer">Visit Big Red</a>
+          </div>
+        </article>
+
+        <div>
+          <div class="faq-item reveal active">
+            <button type="button"><span>Who are Big Red Education experiences for?</span><span>+</span></button>
+            <div class="faq-answer">
+              Big Red Education is aimed at students who want to build leadership, communication, innovation, and globally relevant skills through richer learning experiences.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button type="button"><span>What kinds of offerings does Big Red run?</span><span>+</span></button>
+            <div class="faq-answer">
+              Based on the live site, Big Red runs workshops, conferences, programs, and student experiences around leadership, innovation, and student growth.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button type="button"><span>What is the main promise of the brand?</span><span>+</span></button>
+            <div class="faq-answer">
+              The main promise is that students stand out by learning what actually counts: confidence, self-expression, leadership, and meaningful participation.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button type="button"><span>Can this be extended into a full production site?</span><span>+</span></button>
+            <div class="faq-answer">
+              Yes. This structure is ready for exact images, schedules, registration flows, mentor photos, and final page-by-page content if you want to keep building it.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card reveal">
+        <div>
+          <div class="eyebrow" style="color:var(--ink); background:rgba(30,29,64,0.06); border-color:rgba(30,29,64,0.1);">Big Red Education</div>
+          <h2 style="margin-top:16px;">A Mesa-inspired rebuild using Big Red content.</h2>
+          <p>
+            The page now uses live Big Red Education themes, programs, and event content inside a darker, more premium layout inspired by Mesa School’s homepage structure.
+          </p>
+          <div class="footer-links">
+            <a href="#why-bre">Why BRE</a>
+            <a href="#workshops">Workshops</a>
+            <a href="#mentors">Mentors</a>
+            <a href="#journey">Journey</a>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+        <div>
+          <a class="button button-primary" href="https://bigrededucation.com/" target="_blank" rel="noopener noreferrer">Open Big Red</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach((item) => {
+      const button = item.querySelector("button");
+      button.addEventListener("click", () => {
+        const active = item.classList.contains("active");
+        faqItems.forEach((entry) => entry.classList.remove("active"));
+        if (!active) item.classList.add("active");
+      });
+    });
+
+    const testimonialData = [
+      {
+        text: "Big Red Education workshops are designed to help students stand out through confidence, communication, and stronger self-expression.",
+        name: "Big Red Student",
+        role: "Workshop participant"
+      },
+      {
+        text: "The brand positioning is clear: richer student experiences that go beyond classroom performance and focus on what actually counts.",
+        name: "Parent perspective",
+        role: "Program observer"
+      },
+      {
+        text: "Workshops, conferences, and mentor-driven formats make the learning feel active, ambitious, and more globally aware.",
+        name: "Student attendee",
+        role: "Conference participant"
+      }
+    ];
+
+    let testimonialIndex = 0;
+    const testimonialText = document.getElementById("testimonialText");
+    const testimonialName = document.getElementById("testimonialName");
+    const testimonialRole = document.getElementById("testimonialRole");
+
+    setInterval(() => {
+      testimonialIndex = (testimonialIndex + 1) % testimonialData.length;
+      const current = testimonialData[testimonialIndex];
+      testimonialText.textContent = current.text;
+      testimonialName.textContent = current.name;
+      testimonialRole.textContent = current.role;
+    }, 4200);
+
+    const reveals = document.querySelectorAll(".reveal");
+    reveals.forEach((item, index) => {
+      item.style.transitionDelay = Math.min(index * 45, 220) + "ms";
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>

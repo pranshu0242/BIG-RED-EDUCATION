@@ -140,7 +140,7 @@
     }
 
     .button:hover {
-      transform: translateY(-1px);
+      transform: translateY(-3px) scale(1.01);
     }
 
     .button-primary {
@@ -394,6 +394,18 @@
       background:
         linear-gradient(90deg, rgba(4, 22, 27, 0.54), transparent 48%),
         linear-gradient(180deg, rgba(4, 22, 27, 0.05), rgba(4, 22, 27, 0.18));
+    }
+
+    .hero-media,
+    .footprint-board {
+      animation: floatSlow 8s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .cred-visual,
+    .spotlight-media {
+      animation: floatSoft 10s ease-in-out infinite;
+      will-change: transform;
     }
 
     .hero-quote {
@@ -657,6 +669,12 @@
       border: 1px solid rgba(255, 255, 255, 0.45);
       color: var(--ink);
       box-shadow: var(--shadow-light);
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .mini-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 26px 60px rgba(30, 29, 64, 0.14);
     }
 
     .mini-card-media {
@@ -742,6 +760,12 @@
       border: 1px solid rgba(255, 255, 255, 0.45);
       box-shadow: var(--shadow-light);
       color: var(--ink);
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .mentor-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 60px rgba(30, 29, 64, 0.14);
     }
 
     .mentor-portrait {
@@ -1117,6 +1141,133 @@
       color: #fff8ef;
     }
 
+    .summer-modal-panel {
+      width: min(100%, 660px);
+      max-height: min(86vh, 820px);
+      overflow: auto;
+      padding: 24px;
+      border-radius: 26px;
+      background: rgba(8, 26, 52, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow-dark);
+      color: #fff8ef;
+      backdrop-filter: blur(20px);
+    }
+
+    .summer-modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .summer-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.42rem 0.76rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff8ef;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .summer-title {
+      margin-top: 14px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 0.98;
+      color: #fff8ef;
+      letter-spacing: -0.05em;
+    }
+
+    .summer-title .accent {
+      display: block;
+      color: var(--lime);
+    }
+
+    .summer-subtitle {
+      margin-top: 16px;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      line-height: 1.5;
+      color: rgba(255, 232, 236, 0.82);
+      max-width: 28ch;
+    }
+
+    .summer-subtitle strong {
+      color: #ff6f87;
+    }
+
+    .summer-shell {
+      margin-top: 8px;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .summer-note {
+      margin-top: 14px;
+      color: rgba(255, 232, 236, 0.62);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .summer-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summer-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .summer-field label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff8ef;
+    }
+
+    .summer-field input {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff8ef;
+      border-radius: 16px;
+      padding: 0.9rem 0.95rem;
+      font: inherit;
+      outline: none;
+      transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .summer-field input::placeholder {
+      color: rgba(255, 232, 236, 0.48);
+    }
+
+    .summer-field input:focus {
+      border-color: rgba(217, 228, 107, 0.46);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 4px rgba(217, 228, 107, 0.08);
+    }
+
+    .summer-form-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .summer-skip {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff8ef;
+    }
+
     .apply-modal-top {
       display: flex;
       justify-content: space-between;
@@ -1291,18 +1442,61 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 650ms ease, transform 650ms ease;
+      transform: translateY(28px) scale(0.985);
+      filter: blur(8px);
+      transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1), transform 800ms cubic-bezier(0.22, 1, 0.36, 1), filter 800ms ease;
     }
 
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
+      filter: blur(0);
     }
 
     @keyframes tickerMove {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes boxDrift {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(0, -5px, 0); }
+    }
+
+    .mini-card,
+    .mentor-card,
+    .faq-item {
+      animation: boxDrift 6.5s ease-in-out infinite;
+    }
+
+    .mini-card:nth-child(2n),
+    .mentor-card:nth-child(2n),
+    .faq-item:nth-child(2n) {
+      animation-duration: 7.4s;
+      animation-delay: 0.4s;
+    }
+
+    .mini-card:nth-child(3n),
+    .mentor-card:nth-child(3n),
+    .faq-item:nth-child(3n) {
+      animation-duration: 8s;
+      animation-delay: 0.8s;
+    }
+
+    .mini-card:hover,
+    .mentor-card:hover,
+    .faq-item:hover {
+      animation-play-state: paused;
     }
 
     @media (max-width: 1100px) {
@@ -1376,6 +1570,10 @@
         min-height: 400px;
       }
 
+      .summer-modal-panel {
+        padding: 22px;
+      }
+
       .hero-quote {
         left: 18px;
         max-width: 260px;
@@ -1390,6 +1588,20 @@
       .video-chip {
         left: 14px;
         bottom: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
       }
     }
 
@@ -1899,6 +2111,49 @@
     </div>
   </div>
 
+  <div class="apply-modal hidden" id="summerModal" role="dialog" aria-modal="true" aria-labelledby="summerModalTitle">
+    <div class="summer-modal-panel">
+      <div class="summer-modal-top">
+        <div>
+          <div class="summer-badge">BRE Summer 2026</div>
+          <h2 class="summer-title" id="summerModalTitle">
+            Transformative Courses,
+            <span class="accent">Ivy League Mentors</span>
+          </h2>
+          <p class="summer-subtitle">
+            For more details, please <strong>fill</strong> in the information below, and our team will contact you soon!
+          </p>
+        </div>
+        <button class="apply-close" id="closeSummerModal" type="button" aria-label="Close BRE Summer 2026 popup">×</button>
+      </div>
+      <div class="summer-shell">
+        <form class="summer-form" id="summerLeadForm">
+          <div class="summer-field">
+            <label for="summerName">Name</label>
+            <input id="summerName" name="name" type="text" placeholder="Enter your name">
+          </div>
+          <div class="summer-field">
+            <label for="summerPhone">Phone Number</label>
+            <input id="summerPhone" name="phone" type="tel" placeholder="+91 Phone Number">
+          </div>
+          <div class="summer-field">
+            <label for="summerEmail">Email Address</label>
+            <input id="summerEmail" name="email" type="email" placeholder="Enter your email">
+          </div>
+          <div class="summer-field">
+            <label for="summerSchool">School</label>
+            <input id="summerSchool" name="school" type="text" placeholder="Which school do you belong to?">
+          </div>
+          <div class="summer-form-actions">
+            <button class="button button-primary" type="submit">Submit</button>
+            <button class="button summer-skip" id="skipSummerModal" type="button">Skip for now</button>
+          </div>
+        </form>
+      </div>
+      <p class="summer-note">This startup popup keeps the existing BRE visual language and captures quick inquiry details before visitors continue browsing.</p>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-card reveal">
@@ -1956,6 +2211,10 @@
     const applyModal = document.getElementById("applyModal");
     const openApplyModal = document.getElementById("openApplyModal");
     const closeApplyModal = document.getElementById("closeApplyModal");
+    const summerModal = document.getElementById("summerModal");
+    const closeSummerModal = document.getElementById("closeSummerModal");
+    const skipSummerModal = document.getElementById("skipSummerModal");
+    const summerLeadForm = document.getElementById("summerLeadForm");
 
     function hideApplyModal() {
       applyModal.classList.add("hidden");
@@ -1965,16 +2224,45 @@
       applyModal.classList.remove("hidden");
     }
 
+    function hideSummerModal() {
+      if (summerModal) summerModal.classList.add("hidden");
+    }
+
+    function showSummerModal() {
+      if (summerModal) summerModal.classList.remove("hidden");
+    }
+
     openApplyModal.addEventListener("click", showApplyModal);
     closeApplyModal.addEventListener("click", hideApplyModal);
+    if (closeSummerModal) closeSummerModal.addEventListener("click", hideSummerModal);
+    if (skipSummerModal) skipSummerModal.addEventListener("click", hideSummerModal);
 
     applyModal.addEventListener("click", (event) => {
       if (event.target === applyModal) hideApplyModal();
     });
 
+    if (summerModal) {
+      summerModal.addEventListener("click", (event) => {
+        if (event.target === summerModal) hideSummerModal();
+      });
+    }
+
     window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") hideApplyModal();
+      if (event.key === "Escape") {
+        hideApplyModal();
+        hideSummerModal();
+      }
     });
+
+    if (summerLeadForm) {
+      summerLeadForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        summerLeadForm.reset();
+        hideSummerModal();
+      });
+    }
+
+    window.setTimeout(showSummerModal, 250);
 
     const faqItems = document.querySelectorAll(".faq-item");
     faqItems.forEach((item) => {

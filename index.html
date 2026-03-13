@@ -54,10 +54,10 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.18;
+      opacity: 0.34;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
       background-size: 42px 42px;
       mask-image: radial-gradient(circle at center, black 42%, transparent 90%);
     }
@@ -162,6 +162,68 @@
 
     .hero {
       padding-top: 26px;
+    }
+
+    .ticker-section {
+      padding: 8px 0 26px;
+    }
+
+    .ticker-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow-dark);
+      padding: 14px 0;
+    }
+
+    .ticker-shell::before,
+    .ticker-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 90px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ticker-shell::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(8, 26, 52, 1), rgba(8, 26, 52, 0));
+    }
+
+    .ticker-shell::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(8, 26, 52, 1), rgba(8, 26, 52, 0));
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerMove 28s linear infinite;
+    }
+
+    .ticker-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-right: 14px;
+    }
+
+    .ticker-logo {
+      flex: 0 0 auto;
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-family: "Clash Display", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
     }
 
     .hero-grid {
@@ -584,6 +646,7 @@
 
     .workshop-list {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
     }
 
@@ -596,6 +659,55 @@
       box-shadow: var(--shadow-light);
     }
 
+    .mini-card-media {
+      height: 160px;
+      border-radius: 18px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(217, 13, 50, 0.16), transparent 22%),
+        linear-gradient(180deg, #d7ebf5, #f6e7da);
+    }
+
+    .mini-card-media::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 54px;
+      height: 54px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: rgba(30, 29, 64, 0.18);
+    }
+
+    .mini-card-media::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      width: 68%;
+      height: 62%;
+      transform: translateX(-50%);
+      border-radius: 42% 42% 10% 10%;
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .mini-card-label {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      z-index: 1;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(30, 29, 64, 0.82);
+      color: #fff8ef;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
     .mini-card h3 {
       font-size: 1.18rem;
       margin-bottom: 8px;
@@ -604,6 +716,12 @@
     .mini-card p {
       color: var(--muted);
       line-height: 1.55;
+    }
+
+    .mini-card-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
     }
 
     .mentor-section {
@@ -787,10 +905,248 @@
       line-height: 1.5;
     }
 
+    .footprint-shell {
+      padding: 28px;
+    }
+
+    .footprint-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .footprint-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .footprint-copy h2 {
+      color: var(--ink);
+      font-size: clamp(2.1rem, 4vw, 3.8rem);
+      line-height: 0.95;
+      max-width: 10ch;
+    }
+
+    .footprint-copy p {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 44ch;
+    }
+
+    .footprint-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .footprint-stat {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid var(--line-light);
+    }
+
+    .footprint-stat strong {
+      display: block;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .footprint-stat span {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .footprint-board {
+      position: relative;
+      min-height: 360px;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(74, 176, 217, 0.16), transparent 18%),
+        radial-gradient(circle at 78% 24%, rgba(217, 13, 50, 0.14), transparent 20%),
+        linear-gradient(180deg, rgba(255,255,255,0.68), rgba(255,255,255,0.58));
+      border: 1px solid rgba(30, 29, 64, 0.08);
+    }
+
+    .footprint-board::before {
+      content: "";
+      position: absolute;
+      inset: 14% 8% 12% 8%;
+      border-radius: 50%;
+      border: 1px dashed rgba(30, 29, 64, 0.14);
+      opacity: 0.5;
+    }
+
+    .footprint-orbit {
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      border: 2px solid rgba(27, 101, 166, 0.12);
+    }
+
+    .footprint-orbit.two {
+      inset: 22% 16% 20% 16%;
+      border-color: rgba(217, 13, 50, 0.12);
+    }
+
+    .footprint-hub {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      color: white;
+      box-shadow: 0 18px 34px rgba(27, 101, 166, 0.24);
+      font-family: "Clash Display", sans-serif;
+      letter-spacing: -0.04em;
+      z-index: 2;
+    }
+
+    .footprint-node {
+      position: absolute;
+      min-width: 118px;
+      padding: 0.75rem 0.9rem;
+      border-radius: 18px;
+      background: rgba(248, 239, 228, 0.96);
+      border: 1px solid rgba(30, 29, 64, 0.08);
+      box-shadow: 0 12px 26px rgba(30, 29, 64, 0.12);
+      color: var(--ink);
+      z-index: 2;
+    }
+
+    .footprint-node strong {
+      display: block;
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+
+    .footprint-node span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .footprint-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(27, 101, 166, 0.1), rgba(217, 13, 50, 0.46), rgba(27, 101, 166, 0.12));
+      transform-origin: left center;
+      z-index: 1;
+      opacity: 0.85;
+    }
+
     .faq-grid {
       display: grid;
       grid-template-columns: 0.84fr 1.16fr;
       gap: 18px;
+    }
+
+    .apply-panel {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .apply-panel p {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 52ch;
+    }
+
+    .apply-side {
+      padding: 22px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.54);
+      border: 1px solid var(--line-light);
+      display: grid;
+      gap: 12px;
+      color: var(--ink);
+    }
+
+    .apply-side strong {
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.18rem;
+      letter-spacing: -0.03em;
+    }
+
+    .apply-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 13, 29, 0.56);
+      backdrop-filter: blur(20px);
+      transition: opacity 220ms ease, visibility 220ms ease;
+    }
+
+    .apply-modal.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .apply-modal-panel {
+      width: min(100%, 860px);
+      max-height: min(88vh, 900px);
+      overflow: auto;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(8, 26, 52, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow-dark);
+      color: #fff8ef;
+    }
+
+    .apply-modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .apply-modal-top p {
+      margin-top: 10px;
+      color: rgba(255, 232, 236, 0.76);
+      max-width: 54ch;
+    }
+
+    .apply-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff8ef;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .crm-shell {
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .faq-intro,
@@ -849,36 +1205,88 @@
     }
 
     .footer {
-      padding: 24px 0 48px;
+      padding: 30px 0 48px;
     }
 
     .footer-card {
-      padding: 28px;
+      padding: 34px;
       border-radius: var(--radius-xl);
-      background:
-        radial-gradient(circle at top right, rgba(74, 176, 217, 0.12), transparent 26%),
-        linear-gradient(180deg, rgba(251, 228, 234, 0.96), rgba(246, 217, 224, 0.94));
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      box-shadow: var(--shadow-light);
-      color: var(--ink);
+      background: rgba(8, 26, 52, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow-dark);
+      backdrop-filter: blur(20px);
+      color: #f4efe9;
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: center;
+      grid-template-columns: 1.15fr 0.85fr 0.95fr 1fr;
+      gap: 28px;
+      align-items: start;
     }
 
     .footer-card p {
-      color: var(--muted);
-      margin-top: 12px;
-      max-width: 56ch;
+      color: rgba(255, 240, 243, 0.72);
+      margin-top: 14px;
+      max-width: 34ch;
     }
 
     .footer-links {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      color: rgba(255, 240, 243, 0.76);
+    }
+
+    .footer-col h3 {
+      font-size: 1.05rem;
+      color: #fff8ef;
+      margin-bottom: 16px;
+    }
+
+    .footer-col a,
+    .footer-col div {
+      color: rgba(255, 240, 243, 0.76);
+      line-height: 1.65;
+    }
+
+    .footer-brand {
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.55rem;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: #fff8ef;
+    }
+
+    .footer-social {
       display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff8ef;
+      font-weight: 700;
+    }
+
+    .footer-bottom {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 12px 18px;
-      color: var(--muted);
-      margin-top: 14px;
+      color: rgba(255, 240, 243, 0.72);
+      font-size: 0.95rem;
+    }
+
+    .footer-bottom a {
+      color: rgba(255, 240, 243, 0.82);
     }
 
     .reveal {
@@ -892,11 +1300,18 @@
       transform: translateY(0);
     }
 
+    @keyframes tickerMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
     @media (max-width: 1100px) {
       .hero-grid,
       .cred-grid,
       .workshop-grid,
       .story-grid,
+      .footprint-grid,
+      .apply-panel,
       .faq-grid,
       .footer-card {
         grid-template-columns: 1fr;
@@ -908,6 +1323,10 @@
 
       .step-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .workshop-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -928,9 +1347,25 @@
       .hero-grid,
       .hero-strip,
       .cred-metrics,
+      .footprint-stats,
       .mentor-grid,
-      .step-grid {
+      .step-grid,
+      .workshop-list {
         grid-template-columns: 1fr;
+      }
+
+      .footer-card {
+        padding: 24px;
+        gap: 22px;
+      }
+
+      .footer-bottom {
+        display: block;
+      }
+
+      .ticker-shell::before,
+      .ticker-shell::after {
+        width: 34px;
       }
 
       .section-head {
@@ -1054,6 +1489,33 @@
       </div>
     </section>
 
+    <section class="ticker-section">
+      <div class="container">
+        <div class="ticker-shell reveal" aria-label="School partners ticker">
+          <div class="ticker-track">
+            <div class="ticker-group">
+              <div class="ticker-logo">[Logo] Harvard</div>
+              <div class="ticker-logo">[Logo] Stanford</div>
+              <div class="ticker-logo">[Logo] Yale</div>
+              <div class="ticker-logo">[Logo] Princeton</div>
+              <div class="ticker-logo">[Logo] Columbia</div>
+              <div class="ticker-logo">[Logo] Cornell</div>
+              <div class="ticker-logo">[Logo] Northwestern</div>
+            </div>
+            <div class="ticker-group" aria-hidden="true">
+              <div class="ticker-logo">[Logo] Harvard</div>
+              <div class="ticker-logo">[Logo] Stanford</div>
+              <div class="ticker-logo">[Logo] Yale</div>
+              <div class="ticker-logo">[Logo] Princeton</div>
+              <div class="ticker-logo">[Logo] Columbia</div>
+              <div class="ticker-logo">[Logo] Cornell</div>
+              <div class="ticker-logo">[Logo] Northwestern</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="why-bre">
       <div class="container">
         <div class="section-head reveal">
@@ -1135,20 +1597,34 @@
 
           <div class="workshop-list">
             <article class="mini-card reveal">
+              <div class="mini-card-media" aria-label="Ivy League MUNC creative placeholder">
+                <div class="mini-card-label">Add creative</div>
+              </div>
               <h3>Ivy League MUNC ’26</h3>
               <p>Model UN style exposure built for students interested in diplomacy, global thinking, and debate-led confidence.</p>
             </article>
             <article class="mini-card reveal">
+              <div class="mini-card-media" aria-label="InnovateNOW creative placeholder">
+                <div class="mini-card-label">Add creative</div>
+              </div>
               <h3>InnovateNOW</h3>
               <p>An innovation-oriented experience designed to help students think creatively and solve problems with structure.</p>
             </article>
             <article class="mini-card reveal">
+              <div class="mini-card-media" aria-label="Social Startup Bootcamp creative placeholder">
+                <div class="mini-card-label">Add creative</div>
+              </div>
               <h3>Social Startup Bootcamp</h3>
               <p>Entrepreneurship and impact-driven thinking for students exploring ideas, initiative, and social change.</p>
             </article>
             <article class="mini-card reveal">
-              <h3>Command Z: Future Tech Lab</h3>
-              <p>A future-facing tech experience oriented around curiosity, experimentation, and applied learning.</p>
+              <a class="mini-card-link" href="./command-z-workshop.html">
+                <div class="mini-card-media" aria-label="Command Z Future Tech Lab creative placeholder">
+                  <div class="mini-card-label">Add creative</div>
+                </div>
+                <h3>Command Z: Future Tech Lab</h3>
+                <p>A future-facing tech experience oriented around curiosity, experimentation, and applied learning.</p>
+              </a>
             </article>
           </div>
         </div>
@@ -1274,6 +1750,85 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="container">
+        <article class="light-panel footprint-shell reveal">
+          <div class="footprint-grid">
+            <div class="footprint-copy">
+              <div>
+                <div class="eyebrow" style="color:var(--ink); background:rgba(30,29,64,0.06); border-color:rgba(30,29,64,0.1);">BRE Global Footprint</div>
+                <h2 style="margin-top:16px;">Big Red experiences reaching students across multiple regions.</h2>
+                <p>
+                  Big Red Education can be positioned as a globally active student platform with workshop presence across
+                  Sydney, GCC countries, and London, connecting learners through shared exposure, leadership, and future-ready experiences.
+                </p>
+              </div>
+              <div class="footprint-stats">
+                <div class="footprint-stat">
+                  <strong>Sydney</strong>
+                  <span>Student workshops and international-facing learning experiences.</span>
+                </div>
+                <div class="footprint-stat">
+                  <strong>GCC</strong>
+                  <span>Regional workshop presence across Gulf-focused student communities.</span>
+                </div>
+                <div class="footprint-stat">
+                  <strong>London</strong>
+                  <span>Global exposure and leadership-oriented learning touchpoints.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="footprint-board" aria-hidden="true">
+              <div class="footprint-orbit"></div>
+              <div class="footprint-orbit two"></div>
+              <div class="footprint-hub">BRE<br>Global</div>
+
+              <div class="footprint-line" style="left:50%; top:50%; width:124px; transform:rotate(-35deg);"></div>
+              <div class="footprint-line" style="left:50%; top:50%; width:152px; transform:rotate(18deg);"></div>
+              <div class="footprint-line" style="left:50%; top:50%; width:168px; transform:rotate(140deg);"></div>
+
+              <div class="footprint-node" style="right:10%; top:18%;">
+                <strong>London</strong>
+                <span>Leadership and global exposure</span>
+              </div>
+              <div class="footprint-node" style="right:4%; bottom:16%;">
+                <strong>Sydney</strong>
+                <span>Workshops and student experiences</span>
+              </div>
+              <div class="footprint-node" style="left:8%; top:36%;">
+                <strong>GCC Countries</strong>
+                <span>Regional workshop footprint</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="apply">
+      <div class="container">
+        <article class="light-panel apply-panel reveal">
+          <div>
+            <div class="eyebrow" style="color:var(--ink); background:rgba(30,29,64,0.06); border-color:rgba(30,29,64,0.1);">Apply Now</div>
+            <h2 style="margin-top:16px; color:var(--ink);">Take the next step with Big Red Education.</h2>
+            <p>
+              If you’re ready to explore a workshop, conference, or student program, open the application form and submit your details directly through Big Red Education’s CRM flow.
+            </p>
+            <div class="hero-actions">
+              <button class="button button-primary" id="openApplyModal" type="button">Apply Now</button>
+            </div>
+          </div>
+          <div class="apply-side">
+            <strong>What happens next?</strong>
+            <div>Submit your details</div>
+            <div>Big Red reviews your interest</div>
+            <div>The team connects you to the right program or workshop</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="section" id="faq">
       <div class="container faq-grid">
         <article class="faq-intro reveal">
@@ -1315,31 +1870,112 @@
     </section>
   </main>
 
+  <div class="apply-modal hidden" id="applyModal" role="dialog" aria-modal="true" aria-labelledby="applyModalTitle">
+    <div class="apply-modal-panel">
+      <div class="apply-modal-top">
+        <div>
+          <div class="eyebrow">Big Red Education</div>
+          <h2 id="applyModalTitle" style="margin-top:14px; color:#fff8ef;">Apply Now</h2>
+          <p>Complete the form below to express interest in a Big Red Education workshop or program.</p>
+        </div>
+        <button class="apply-close" id="closeApplyModal" type="button" aria-label="Close application form">×</button>
+      </div>
+      <div class="crm-shell">
+        <div id="ee-form-1">
+         <script src="https://eeconfigstaticfiles.blob.core.windows.net/staticfiles/bigrededucation/ee-form-widget/form-1/widgetone.js"></script>
+        </div>
+
+
+        <style>
+            .page-id-129298 div#ee-floating-control-container-ee-form-3-form-3 {
+            display: none;
+        }
+
+        .page-id-129298 div#ee-floating-control-container-ee-form-4-form-4 {
+            display: none;
+        }
+        </style>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-card reveal">
-        <div>
-          <div class="eyebrow" style="color:var(--ink); background:rgba(30,29,64,0.06); border-color:rgba(30,29,64,0.1);">Big Red Education</div>
-          <h2 style="margin-top:16px;">A Mesa-inspired rebuild using Big Red content.</h2>
-          <p>
-            The page now uses live Big Red Education themes, programs, and event content inside a darker, more premium layout inspired by Mesa School’s homepage structure.
-          </p>
+        <div class="footer-col">
+          <div class="footer-brand">BIG RED<br>EDUCATION</div>
+          <p>Building confident leaders for a changing world.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Useful Links</h3>
           <div class="footer-links">
-            <a href="#why-bre">Why BRE</a>
+            <a href="#top">Home</a>
             <a href="#workshops">Workshops</a>
+            <a href="#why-bre">Why BRE</a>
             <a href="#mentors">Mentors</a>
-            <a href="#journey">Journey</a>
             <a href="#faq">FAQ</a>
           </div>
         </div>
-        <div>
-          <a class="button button-primary" href="https://bigrededucation.com/" target="_blank" rel="noopener noreferrer">Open Big Red</a>
+
+        <div class="footer-col">
+          <h3>Our Workshops</h3>
+          <div class="footer-links">
+            <div>Ivy League MUNC ’26</div>
+            <div>InnovateNOW</div>
+            <div>Social Startup Bootcamp</div>
+            <div>Leadership &amp; Social Innovation Conference</div>
+            <div>Command Z: Future Tech Lab</div>
+          </div>
         </div>
+
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <div class="footer-links">
+            <div>606, Tower A, Emaar Digital Greens, Golf Course Rd, Gurugram</div>
+            <div>+91-9310450013</div>
+            <div>info@bigrededucation.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom reveal">
+        <div>Copyright 2025, <strong>Big Red Education</strong>. All Rights Reserved.</div>
+        <div><a href="#">Terms &amp; Conditions</a></div>
       </div>
     </div>
   </footer>
 
   <script>
+    const applyModal = document.getElementById("applyModal");
+    const openApplyModal = document.getElementById("openApplyModal");
+    const closeApplyModal = document.getElementById("closeApplyModal");
+
+    function hideApplyModal() {
+      applyModal.classList.add("hidden");
+    }
+
+    function showApplyModal() {
+      applyModal.classList.remove("hidden");
+    }
+
+    openApplyModal.addEventListener("click", showApplyModal);
+    closeApplyModal.addEventListener("click", hideApplyModal);
+
+    applyModal.addEventListener("click", (event) => {
+      if (event.target === applyModal) hideApplyModal();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") hideApplyModal();
+    });
+
     const faqItems = document.querySelectorAll(".faq-item");
     faqItems.forEach((item) => {
       const button = item.querySelector("button");

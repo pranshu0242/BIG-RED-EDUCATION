@@ -1,0 +1,1773 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Command Z Future Tech Lab</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Clash+Display:wght@500;600;700&display=swap");
+
+    :root {
+      --bg: #081a34;
+      --bg-deep: #050d1d;
+      --panel: #f6d9de;
+      --panel-soft: #fdecef;
+      --panel-warm: #fff3ea;
+      --ink: #1e1d40;
+      --muted: #655f72;
+      --red: #d90d32;
+      --navy: #1e1d40;
+      --blue: #1b65a6;
+      --sky: #4ab0d9;
+      --lime: #d9e46b;
+      --line-dark: rgba(255, 255, 255, 0.1);
+      --line-light: rgba(30, 29, 64, 0.12);
+      --shadow-dark: 0 24px 80px rgba(0, 0, 0, 0.24);
+      --shadow-light: 0 22px 60px rgba(30, 29, 64, 0.16);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --container: 1260px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: #f4efe9;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(74, 176, 217, 0.2), transparent 22%),
+        radial-gradient(circle at 90% 12%, rgba(27, 101, 166, 0.16), transparent 24%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 54%, #10264a 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.34;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black 42%, transparent 92%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 28px), var(--container));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 26, 52, 0.74);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .header-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #fff9f2;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      box-shadow: 0 12px 26px rgba(27, 101, 166, 0.28);
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: rgba(255, 234, 238, 0.78);
+      font-size: 0.94rem;
+    }
+
+    .nav a:hover {
+      color: #fff9f2;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.92rem 1.22rem;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      font-weight: 800;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      color: var(--ink);
+      background: var(--lime);
+      box-shadow: 0 16px 34px rgba(217, 228, 107, 0.18);
+    }
+
+    .button-secondary {
+      color: #fff8ef;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .page-shell {
+      padding: 26px 0 52px;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .content-column {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .form-column {
+      position: sticky;
+      top: 98px;
+      width: 100%;
+      align-self: start;
+    }
+
+    .section {
+      margin-bottom: 22px;
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .panel-dark {
+      background:
+        radial-gradient(circle at top right, rgba(74, 176, 217, 0.18), transparent 28%),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .panel-light {
+      background:
+        radial-gradient(circle at top right, rgba(74, 176, 217, 0.14), transparent 28%),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+      color: #f4efe9;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .hero-card {
+      padding: 34px;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -110px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217, 228, 107, 0.32), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.46rem 0.84rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #eaf7ff;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sky);
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-family: "Clash Display", sans-serif;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(2.2rem, 4.4vw, 4rem);
+      line-height: 1;
+      max-width: 12ch;
+    }
+
+    .hero-pretitle {
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 0.98rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 233, 0.68);
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+    }
+
+    .hero-title-strong {
+      display: block;
+      color: #fffaf3;
+      text-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      line-height: 0.98;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.7;
+      color: inherit;
+    }
+
+    .hero-lead {
+      margin-top: 18px;
+      max-width: 62ch;
+      color: rgba(244, 239, 233, 0.82);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .meta-card {
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .meta-label {
+      display: block;
+      color: rgba(244, 239, 233, 0.62);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .meta-value {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #fffaf3;
+    }
+
+    .meta-note {
+      margin-top: 6px;
+      font-size: 0.88rem;
+      color: rgba(244, 239, 233, 0.68);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .section-card {
+      padding: 28px;
+    }
+
+    .section-card p + p {
+      margin-top: 12px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      color: var(--sky);
+      font-weight: 800;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      padding: 0.72rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff8ef;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(30, 29, 64, 0.08);
+      box-shadow: var(--shadow-light);
+    }
+
+    .stat-value {
+      display: block;
+      font-family: "Clash Display", sans-serif;
+      font-size: 2rem;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .stat-copy {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .module-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .module-index {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      color: white;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .module-card p {
+      margin-top: 10px;
+      color: rgba(244, 239, 233, 0.74);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 126px minmax(0, 1fr);
+      gap: 16px;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .timeline-time {
+      font-family: "Clash Display", sans-serif;
+      color: var(--red);
+      font-size: 1rem;
+    }
+
+    .pricing-card {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .pricing-block {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .price-tag {
+      margin-top: 12px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .price-now {
+      font-family: "Clash Display", sans-serif;
+      font-size: 2.4rem;
+      color: #fff8ef;
+    }
+
+    .price-before {
+      color: rgba(244, 239, 233, 0.62);
+      text-decoration: line-through;
+      font-weight: 700;
+    }
+
+    .price-note {
+      margin-top: 10px;
+      color: rgba(244, 239, 233, 0.74);
+      font-size: 0.92rem;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .list-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: #fff8ef;
+    }
+
+    .list-item::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 0.45rem;
+      background: var(--sky);
+      flex: 0 0 auto;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .tab-container {
+      margin-top: 18px;
+    }
+
+    .tabsfaqs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tabf {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(244, 239, 233, 0.78);
+      border-radius: 999px;
+      padding: 0.78rem 1rem;
+      font: inherit;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease, transform 180ms ease, border-color 180ms ease;
+    }
+
+    .tabf:hover {
+      transform: translateY(-1px);
+      color: #fff8ef;
+    }
+
+    .tabf.active {
+      background: var(--lime);
+      color: var(--ink);
+      border-color: transparent;
+      box-shadow: 0 16px 34px rgba(217, 228, 107, 0.16);
+    }
+
+    .faqs-content {
+      display: none;
+    }
+
+    .faqs-content.active {
+      display: block;
+    }
+
+    .faq-accordion {
+      display: grid;
+      gap: 12px;
+    }
+
+    .accordion-item-faqs {
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .accordion-title-one {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      border: 0;
+      background: transparent;
+      color: #fff8ef;
+      font: inherit;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .accordion-title-one .arrow {
+      flex: 0 0 auto;
+      color: var(--sky);
+      transition: transform 180ms ease;
+    }
+
+    .accordion-title-one.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 0 18px 18px;
+      color: rgba(244, 239, 233, 0.76);
+      line-height: 1.7;
+    }
+
+    .accordion-content p + p {
+      margin-top: 10px;
+    }
+
+    .accordion-content a {
+      color: var(--lime);
+    }
+
+    .faculty-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .faculty-visual {
+      min-height: 320px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top left, rgba(217, 13, 50, 0.18), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .faculty-visual::before {
+      content: "";
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      position: absolute;
+      top: 52px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .faculty-visual::after {
+      content: "";
+      width: 170px;
+      height: 170px;
+      border-radius: 46% 46% 18% 18%;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      position: absolute;
+      bottom: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .faculty-placeholder-label {
+      position: relative;
+      z-index: 1;
+      margin-top: 180px;
+      max-width: 22ch;
+      color: rgba(244, 239, 233, 0.82);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .residential-media {
+      margin-top: 22px;
+      min-height: 240px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(5, 13, 29, 0.22), rgba(5, 13, 29, 0.34)),
+        linear-gradient(135deg, rgba(27, 101, 166, 0.9), rgba(30, 29, 64, 0.94));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .residential-media::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.28;
+    }
+
+    .video-placeholder-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+    }
+
+    .video-play {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--red);
+      font-size: 1.7rem;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+    }
+
+    .video-placeholder-title {
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.3rem;
+      color: #fff8ef;
+    }
+
+    .video-placeholder-copy {
+      max-width: 28ch;
+      color: rgba(244, 239, 233, 0.76);
+      line-height: 1.6;
+    }
+
+    .faculty-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 13, 29, 0.72);
+      backdrop-filter: blur(18px);
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 180ms ease, visibility 180ms ease;
+    }
+
+    .video-modal.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .video-modal-panel {
+      width: min(100%, 960px);
+      border-radius: 28px;
+      padding: 20px;
+      background: linear-gradient(180deg, rgba(8, 26, 52, 0.96), rgba(5, 13, 29, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .video-modal-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .video-modal-top p {
+      margin-top: 10px;
+      color: rgba(244, 239, 233, 0.74);
+      max-width: 56ch;
+    }
+
+    .video-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff8ef;
+      font: inherit;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .video-frame-shell {
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-frame-shell iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    details {
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px 18px;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 800;
+      color: #fff8ef;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      margin-top: 12px;
+      color: rgba(244, 239, 233, 0.74);
+    }
+
+    .form-card {
+      padding: 18px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, #fff7ef 0%, #f6d9de 100%);
+      color: var(--ink);
+      box-shadow: var(--shadow-light);
+      border: 1px solid rgba(30, 29, 64, 0.08);
+    }
+
+    .form-header {
+      padding: 8px 6px 18px;
+    }
+
+    .form-kicker {
+      display: inline-flex;
+      padding: 0.42rem 0.76rem;
+      border-radius: 999px;
+      background: rgba(30, 29, 64, 0.08);
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .form-header h2 {
+      margin-top: 12px;
+      font-size: 2rem;
+      line-height: 0.98;
+    }
+
+    .form-copy {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .form-frame {
+      min-height: 560px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(30, 29, 64, 0.08);
+      overflow: hidden;
+      padding: 12px;
+      contain: layout paint;
+    }
+
+    #ee-form-1 {
+      min-height: 530px;
+    }
+
+    .form-footer {
+      margin-top: 14px;
+      padding: 0 6px 6px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    .cta-band {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px;
+    }
+
+    .cta-band p {
+      color: rgba(244, 239, 233, 0.8);
+      max-width: 56ch;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: rgba(244, 239, 233, 0.62);
+      font-size: 0.9rem;
+      padding: 4px 0 0;
+    }
+
+    .footer {
+      padding: 10px 0 48px;
+    }
+
+    .footer-card {
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      background: rgba(8, 26, 52, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow-dark);
+      backdrop-filter: blur(20px);
+      color: #f4efe9;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr 0.95fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .footer-card p {
+      color: rgba(255, 240, 243, 0.72);
+      margin-top: 14px;
+      max-width: 34ch;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      color: rgba(255, 240, 243, 0.76);
+    }
+
+    .footer-col h3 {
+      font-size: 1.05rem;
+      color: #fff8ef;
+      margin-bottom: 16px;
+    }
+
+    .footer-col a,
+    .footer-col div {
+      color: rgba(255, 240, 243, 0.76);
+      line-height: 1.65;
+    }
+
+    .footer-brand {
+      font-family: "Clash Display", sans-serif;
+      font-size: 1.55rem;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: #fff8ef;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff8ef;
+      font-weight: 700;
+    }
+
+    .footer-bottom {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: rgba(255, 240, 243, 0.72);
+      font-size: 0.95rem;
+    }
+
+    .footer-bottom a {
+      color: rgba(255, 240, 243, 0.82);
+    }
+
+    .page-id-129298 div#ee-floating-control-container-ee-form-3-form-3,
+    .page-id-129298 div#ee-floating-control-container-ee-form-4-form-4 {
+      display: none;
+    }
+
+    @media (max-width: 1120px) {
+      .pricing-card,
+      .info-grid,
+      .faculty-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .page-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .content-column {
+        width: 100%;
+      }
+
+      .form-column {
+        position: static;
+        width: 100%;
+      }
+
+      .form-frame {
+        overflow: hidden;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .meta-grid,
+      .stats-strip,
+      .modules-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-card {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero-card,
+      .section-card,
+      .cta-band {
+        padding: 24px;
+      }
+
+      .meta-grid,
+      .stats-strip,
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-card {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+
+      .tabsfaqs {
+        gap: 8px;
+      }
+
+      .tabf {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 14vw, 4rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark">BR</span>
+        <span>Big Red Education</span>
+      </a>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#modules">Modules</a>
+        <a href="#residential">Residential</a>
+        <a href="#pricing">Fees</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="button button-primary" href="#apply">Apply Now</a>
+    </div>
+  </header>
+
+  <main class="page-shell" id="top">
+    <div class="container page-grid">
+      <div class="content-column">
+        <section class="section panel panel-dark hero-card">
+          <div class="eyebrow">Command Z Future Tech Lab 2026</div>
+          <h1>
+            <span class="hero-pretitle">A Week Long Residential Workshop</span>
+            <span class="hero-title-strong">Command Z: Future Tech Lab</span>
+          </h1>
+          <p class="hero-lead">
+            A six-day immersive future-tech lab for students in Grades 8 to 12, designed to build confidence with AI, creative technology, digital strategy, and emerging tools in a hands-on residential setting at Mayo College, Ajmer.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#apply">Start Your Application</a>
+            <a class="button button-secondary" href="#modules">Explore the Modules</a>
+          </div>
+          <div class="meta-grid">
+            <article class="meta-card">
+              <span class="meta-label">Dates</span>
+              <div class="meta-value">July 6-11, 2026</div>
+              <div class="meta-note">Six-day immersive lab</div>
+            </article>
+            <article class="meta-card">
+              <span class="meta-label">Time</span>
+              <div class="meta-value">9 AM to 3 PM IST</div>
+              <div class="meta-note">Daily in-person sessions</div>
+            </article>
+            <article class="meta-card">
+              <span class="meta-label">Location</span>
+              <div class="meta-value">Mayo College, Ajmer</div>
+              <div class="meta-note">Residential campus experience</div>
+            </article>
+            <article class="meta-card">
+              <span class="meta-label">Eligibility</span>
+              <div class="meta-value">Grades 8-12</div>
+              <div class="meta-note">For curious builders and explorers</div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section stats-strip" id="overview">
+          <article class="stat-card">
+            <span class="stat-value">5</span>
+            <div class="stat-label">core modules</div>
+            <p class="stat-copy">AI, future trends, marketing strategy, creativity, and digital narratives.</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-value">6</span>
+            <div class="stat-label">days on campus</div>
+            <p class="stat-copy">An immersive format built for practice, reflection, and high-energy collaboration.</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-value">1</span>
+            <div class="stat-label">faculty lead</div>
+            <p class="stat-copy">Led by Dr. Blaine Fisher, Director of Global Education at Big Red Education.</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-value">₹36K</span>
+            <div class="stat-label">early bird fee</div>
+            <p class="stat-copy">Early-bird tuition available through May 15, 2026.</p>
+          </article>
+        </section>
+
+        <section class="section panel panel-light section-card">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Faculty</div>
+              <h2>Learn with Dr. Blaine Fisher.</h2>
+            </div>
+          </div>
+          <div class="faculty-layout">
+            <div class="faculty-visual" aria-label="Faculty image placeholder">
+              <div class="faculty-placeholder-label">Mentor image placeholder. Add faculty photo here.</div>
+            </div>
+            <div>
+              <p>
+                The program is led by Dr. Blaine Fisher, Director of Global Education at Big Red Education. The workshop is framed around helping students think critically about technology, communicate ideas effectively, and explore how future tools connect with creativity and leadership.
+              </p>
+              <div class="faculty-actions">
+                <button
+                  class="button button-primary"
+                  type="button"
+                  id="openFacultyVideo"
+                  data-video-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                >
+                  Watch Mentor Video
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section info-grid">
+          <article class="panel panel-light section-card">
+            <div class="section-head">
+              <div>
+                <div class="section-kicker">Why This Lab</div>
+                <h2>Future-facing learning built for the next decade.</h2>
+              </div>
+            </div>
+            <p>
+              Command Z is designed for students who want to understand where technology is going and how to participate in shaping it. Instead of passive lectures, the experience uses discussion, experimentation, and project-based exercises to make new technologies feel tangible.
+            </p>
+            <p>
+              Students engage with emerging ideas across AI, digital storytelling, strategy, and innovation while also building the creative confidence needed to express original thinking.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Hands-on sessions</span>
+              <span class="chip">Team exploration</span>
+              <span class="chip">Creative experimentation</span>
+              <span class="chip">Future-ready mindset</span>
+            </div>
+          </article>
+
+          <article class="panel panel-light section-card">
+            <div class="section-head">
+              <div>
+                <div class="section-kicker">Who It Is For</div>
+                <h2>Students who are curious, creative, and ready to build ahead of the curve.</h2>
+              </div>
+            </div>
+            <p>
+              The workshop is open to students in Grades 8 through 12 who want exposure to the technologies, ideas, and creative practices shaping the future.
+            </p>
+            <div class="list">
+              <div class="list-item">Students interested in emerging technology and AI</div>
+              <div class="list-item">Learners who enjoy experimentation and practical projects</div>
+              <div class="list-item">Teens exploring future careers, innovation, or entrepreneurship</div>
+              <div class="list-item">Young creators who want to tell stories and build digitally</div>
+            </div>
+          </article>
+        </section>
+
+        <section class="section panel panel-light section-card" id="modules">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Curriculum</div>
+              <h2>Five modules that connect technology, strategy, and imagination.</h2>
+            </div>
+          </div>
+          <div class="modules-grid">
+            <article class="module-card">
+              <div class="module-index">01</div>
+              <h3>AI and Beyond</h3>
+              <p>Build a foundation in artificial intelligence, its current applications, and the wider future-tech landscape students should understand now.</p>
+            </article>
+            <article class="module-card">
+              <div class="module-index">02</div>
+              <h3>Future Trendspotting</h3>
+              <p>Learn to identify signals of change and make sense of the trends, industries, and shifts that are redefining tomorrow’s world.</p>
+            </article>
+            <article class="module-card">
+              <div class="module-index">03</div>
+              <h3>Marketing in the Digital Age</h3>
+              <p>Explore how brands communicate today, how digital campaigns work, and how strategy, storytelling, and audiences connect.</p>
+            </article>
+            <article class="module-card">
+              <div class="module-index">04</div>
+              <h3>Creative Technology</h3>
+              <p>Use emerging tools to turn ideas into artifacts, experiments, concepts, and creative outputs with real-world resonance.</p>
+            </article>
+            <article class="module-card">
+              <div class="module-index">05</div>
+              <h3>Digital Storytelling</h3>
+              <p>Develop sharper communication by crafting narratives, pitches, and presentations that make complex ideas engaging and clear.</p>
+            </article>
+            <article class="module-card">
+              <div class="module-index">+</div>
+              <h3>Applied Workshop Format</h3>
+              <p>Every module is delivered through interaction, discussion, creation, and reflection so students leave with usable thinking, not just notes.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section info-grid">
+          <article class="panel panel-light section-card">
+            <div class="section-head">
+              <div>
+                <div class="section-kicker">Daily Flow</div>
+                <h2>A structured day with room for exploration.</h2>
+              </div>
+            </div>
+            <p>
+              Sessions run from 9:00 AM to 3:00 PM IST, balancing concept-building with hands-on experimentation. The experience is designed to keep students active, engaged, and producing work throughout the day.
+            </p>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-time">9:00 AM</div>
+                <div>
+                  <h3>Morning launch</h3>
+                  <p>Context-setting, trend decoding, and faculty-led exploration of the day’s topic.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">Midday</div>
+                <div>
+                  <h3>Lab exercises</h3>
+                  <p>Students work through prompts, tools, experiments, and collaborative activities.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">Afternoon</div>
+                <div>
+                  <h3>Build and share</h3>
+                  <p>Project development, presentations, critique, and a daily reflection loop.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel panel-light section-card" id="residential">
+            <div class="section-head">
+              <div>
+                <div class="section-kicker">Residential Experience</div>
+                <h2>Hosted at Mayo College, Ajmer.</h2>
+              </div>
+            </div>
+            <p>
+              The program takes place on the Mayo College campus in Ajmer, giving students a focused environment for learning, conversation, and community. The residential setting supports deeper immersion and a stronger peer experience.
+            </p>
+            <div class="list">
+              <div class="list-item">Campus-based setting for full immersion</div>
+              <div class="list-item">Residential experience integrated into the program fee</div>
+              <div class="list-item">Structured environment for collaboration and independence</div>
+              <div class="list-item">Designed to feel both rigorous and energizing</div>
+            </div>
+            <div class="residential-media" aria-label="YouTube video placeholder">
+              <div class="video-placeholder-inner">
+                <div class="video-play">▶</div>
+                <div class="video-placeholder-title">Residential campus video placeholder</div>
+                <div class="video-placeholder-copy">Add a YouTube campus or workshop video here to showcase the Mayo College residential experience.</div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="section panel panel-light section-card" id="pricing">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Program Fee</div>
+              <h2>Clear pricing with an early-bird window.</h2>
+            </div>
+          </div>
+          <div class="pricing-card">
+            <div class="pricing-block">
+              <h3>Early-bird registration</h3>
+              <div class="price-tag">
+                <span class="price-now">₹36,000</span>
+                <span class="price-before">₹40,000</span>
+              </div>
+              <p class="price-note">Available until May 15, 2026.</p>
+              <div class="list">
+                <div class="list-item">Six-day program tuition</div>
+                <div class="list-item">Residential experience at Mayo College</div>
+                <div class="list-item">Workshop delivery and guided activities</div>
+              </div>
+            </div>
+            <div class="pricing-block">
+              <h3>Key details</h3>
+              <div class="list">
+                <div class="list-item">Program dates: July 6-11, 2026</div>
+                <div class="list-item">Timings: 9:00 AM to 3:00 PM IST</div>
+                <div class="list-item">Open to students in Grades 8-12</div>
+                <div class="list-item">Location: Mayo College, Ajmer</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section panel panel-dark cta-band">
+          <div>
+            <div class="section-kicker" style="color: var(--lime);">Apply</div>
+            <h2>Ready to join the lab?</h2>
+            <p>
+              Use the application form on the right to register interest and take the next step toward an immersive future-tech experience.
+            </p>
+          </div>
+          <a class="button button-primary" href="#apply">Complete the Form</a>
+        </section>
+
+        <section class="section panel panel-light section-card" id="faq">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">FAQ</div>
+              <h2>You have Questions? We have Answers!</h2>
+            </div>
+          </div>
+          <div class="tab-container">
+            <div class="tabsfaqs">
+              <button class="tabf active" data-tab="program">PROGRAM</button>
+              <button class="tabf" data-tab="general">GENERAL</button>
+              <button class="tabf" data-tab="fee">FEE</button>
+              <button class="tabf" data-tab="application">APPLICATION &amp; SELECTION</button>
+              <button class="tabf" data-tab="residential-tab">RESIDENTIAL</button>
+            </div>
+
+            <div class="tab-content">
+              <div class="faqs-content active" id="program">
+                <div class="faq-accordion">
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one active">Who is this conference for?<span class="arrow">&#9650;</span></button>
+                    <div class="accordion-content" style="display: block;">
+                      <p>Led by expert mentor, this hands-on program empowers current and future leaders to master AI, data, and agile thinking, building the confidence and skills to lead in today’s digital world.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What will I receive after I attend the bootcamp?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>On the final day of the program, you’ll showcase what you’ve learned before an audience of 200 guests, including parents, school leaders, counselors, the press, and a distinguished chief guest, and receive your Certificate of Completion.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faqs-content" id="general">
+                <div class="faq-accordion">
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What will be the mode of the program?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>The program will be conducted offline.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">Will I Get recording of the bootcamp?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Unfortunately, we will be unable to share the recordings of the lectures, therefore we request all participants to attend all sessions.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">How is the bootcamp structured?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Expect the program to be highly interactive and engaging. There are many group discussions, activities and competition. All the skill learning session and activities will keep the pace rapid so boredom won’t set in. We ensure a two-way interaction by providing enough time for questions, comments, and discussion. Breaks will be scheduled frequently so you can stretch, walk, talk, and grab a bite.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">I have more queries?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Please call us at <a href="tel:+919310450013">+91-931-0450-013</a> or email us at <a href="mailto:info@bigrededucation.com">info@bigrededucation.com</a> for further information.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faqs-content" id="fee">
+                <div class="faq-accordion">
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What is your bootcamp cancellation or refund policy?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>If you request to cancel 30 days before the program’s start date, a full refund will be issued. If you request to cancel 15 days before the program’s start date, you will receive a 50% refund. No refunds will be granted for cancellations requested within 15 days of the program’s start date. All refunds will be processed within 2 weeks following the conclusion of the program.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What are my payment options?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Bootcamp fees are to be paid in full upon receipt of the acceptance email. We accept various forms of payment including Check, Money Order, Visa, American Express, MasterCard, Direct Deposit, and Wire Transfer.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What happens if I don’t show up for the program?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>If you fail to inform us that you cannot attend the program, you will be charged the entire course fee. No certification will be provided.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faqs-content" id="application">
+                <div class="faq-accordion">
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What if I miss my payment deadline? Can I still make a delayed payment and attend the course?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>If you have missed the payment deadline, you can request an extension by calling us or emailing us at <a href="mailto:info@bigrededucation.com">info@bigrededucation.com</a>. Depending on the availability of seats, we will offer an extension.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faqs-content" id="residential-tab">
+                <div class="faq-accordion">
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">Program Schedule &amp; Travel Details<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>The program will be held from 6th to 10th January. Participants are expected to arrive on 5th January, any time after 5:00 PM, to settle in and complete registration formalities. The departure will be scheduled for the evening of 10th January, or latest by the morning of 11th January. Detailed information regarding pick-up, drop-off, and travel assistance will be shared closer to the program dates.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">How safe will the school be?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Safety is our priority. All journeys and activities are fully supervised by our experienced teaching staff.</p>
+                      <p>The Mayo College is a gated community with 24-hour security, and nobody can leave or enter the school without permission of the school authorities.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">How much money should I carry?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>As the course is all-inclusive, students will require pocket money only, ideally not more than around Rs 3,000 to Rs 5,000.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What are the accommodation facilities?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Mayo College has comfortable boarding houses with modern facilities. Girls will be residing in one house and boys in a separate house. Both houses will be fully staffed by our experienced boarding housemasters. In the respective houses, rooms will be shared. All houses have common rooms with recreational facilities. All sports facilities, such as the swimming pool, futsal courts, tennis courts, basketball courts and squash courts, as well as fields and grounds for cricket, soccer and hockey are all within easy walking distance from the boarding houses. The Music School, Rose Bowl Amphitheatre, Library with internet access, Central Dining Hall, Art and Media Centre, IT Centre and Wellness Centre will be available for use. There is wi-fi internet access across the entire campus.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What are the provisions for emergencies?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Students and or their parents are requested to inform the school of any medical problems in advance, including allergies that they may have. If students have diabetes, allergies, asthma or any condition that may require specialised care, students are requested always to carry some identification indicating the prescriptions required in case of an emergency. Each student will need a fitness certificate from a physician. The school requires this information in advance of the student’s arrival. The outdoor trips will be led by a team of staff from Mayo College who are very experienced in organizing activities of this nature across all age groups. The team will include first aiders and will always carry a comprehensive first aid kit. The care givers will all be carrying emergency numbers of the nearest hospitals and ambulance services.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">Is there a laundry facility available?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Full laundry facilities are available at the school. Details of how the system works will be explained to all students on arrival.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">My child has dietary limitations. Can these be met?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Mayo College can provide for all known dietary requirements, either religious or medical. Before any group’s arrival we make sure that we receive any special dietary requirements for all students and teachers so that we can provide this information to our catering manager. If in doubt, please contact us directly with specifics of your needs.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What kind of food is available?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Mayo College offers a modern and comfortable Central Dining Hall which serves a nutritious and varied menu of Indian, oriental and western cuisine. The menus are designed to meet the needs and palates of vegetarians and non-vegetarians, as well as anyone with special dietary requirements.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">How far is the hospital?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Mayo College’s Wellness Centre is a fully staffed and equipped medical centre and hospital with in-patient facilities at the very heart of the campus. It is staffed by a doctor, nurse and support staff, and has its own ambulance. Any serious problems are referred immediately to specialists in the city, as appropriate.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">Are mobile phones allowed?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Yes, students are allowed to carry their mobile phones to the venue. However, they won’t be allowed to use their phones during the conference, between 9 am and 3 pm IST.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">Are laptops, iPods, and iPads allowed?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Yes, participants are responsible for their machines and must ensure that they are in adherence with the IT Act and policies currently prevailing. Any non-adherence will lead to the school intervening and taking necessary remedial steps.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">Can I carry a camera?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Yes, but at the owner’s responsibility.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">Can I carry my guitar?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Please do carry a guitar or any other portable musical instrument that you play; it will be very useful and welcome.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What is the weather like at that time of year?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Average temperatures in Ajmer during July range from around 25C to 35C. The weather is warm and humid, with occasional to moderate rainfall due to the monsoon season. The Mayo College campus, with its lush greenery and shaded avenues, often feels slightly cooler than the city, especially after rain. Light, breathable clothing is recommended. Pack cotton outfits, a light rain jacket or poncho, and quick-dry layers. For outdoor activities, bring comfortable walking or trekking shoes with good grip, as paths may be wet, along with an umbrella or rain protection for camping and excursions.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What else can, or should, students carry with them?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>Carry a torch, basic medicines you may need, mosquito repellent cream, a pair of sports shoes and floaters, as well as regular slippers. Don’t forget essentials like a hair comb, moisturizer, nail clipper, and clothes suitable for the climate. An outdoor kit comprising a small rucksack and a sleeping bag will be required for the outdoor excursion.</p>
+                    </div>
+                  </div>
+                  <div class="accordion-item-faqs">
+                    <button class="accordion-title-one">What is the dress code for girls and boys?<span class="arrow">&#9660;</span></button>
+                    <div class="accordion-content">
+                      <p>All must adhere to propriety and dress modestly. Girls may wear shorts and skirts that are of a decent length. Sleeveless tops with spaghetti straps and low necklines are not permitted. Boys must also dress suitably. Shorts must be of a decent length and T-shirts with loud or offensive slogans are not allowed.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <p class="footer-note">Command Z Future Tech Lab page concept using the Big Red Education visual language and source workshop details.</p>
+      </div>
+
+      <aside class="form-column" id="apply">
+        <section class="form-card">
+          <div class="form-header">
+            <div class="form-kicker">Apply Now</div>
+            <h2>Keep the form visible while the page tells the story.</h2>
+          </div>
+          <div class="form-frame">
+            <div id="ee-form-1">
+              <script src="https://eeconfigstaticfiles.blob.core.windows.net/staticfiles/bigrededucation/ee-form-widget/form-1/widgetone.js"></script>
+            </div>
+          </div>
+          <div class="form-footer">
+            If the embedded form takes a moment to load, the container stays reserved so the layout remains stable during scroll.
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <div class="footer-col">
+          <div class="footer-brand">BIG RED<br>EDUCATION</div>
+          <p>Building confident leaders for a changing world.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Useful Links</h3>
+          <div class="footer-links">
+            <a href="#top">Home</a>
+            <a href="#overview">Overview</a>
+            <a href="#modules">Modules</a>
+            <a href="#pricing">Fees</a>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Our Workshops</h3>
+          <div class="footer-links">
+            <div>Ivy League MUNC '26</div>
+            <div>InnovateNOW</div>
+            <div>Social Startup Bootcamp</div>
+            <div>Leadership &amp; Social Innovation Conference</div>
+            <div>Command Z: Future Tech Lab</div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <div class="footer-links">
+            <div>606, Tower A, Emaar Digital Greens, Golf Course Rd, Gurugram</div>
+            <div>+91-9310450013</div>
+            <div>info@bigrededucation.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>Copyright 2025, <strong>Big Red Education</strong>. All Rights Reserved.</div>
+        <div><a href="#">Terms &amp; Conditions</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="video-modal hidden" id="facultyVideoModal" aria-hidden="true">
+    <div class="video-modal-panel">
+      <div class="video-modal-top">
+        <div>
+          <div class="section-kicker" style="color: var(--lime);">Faculty Video</div>
+          <h2 style="font-size: clamp(1.8rem, 3vw, 2.6rem); color: #fff8ef; margin-top: 10px;">Mentor walkthrough</h2>
+          <p>Replace the current YouTube embed link on the button in the Faculty section with your final mentor video.</p>
+        </div>
+        <button class="video-close" type="button" id="closeFacultyVideo" aria-label="Close video popup">X</button>
+      </div>
+      <div class="video-frame-shell">
+        <iframe
+          id="facultyVideoFrame"
+          src=""
+          title="Faculty YouTube video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tabs = document.querySelectorAll(".tabf");
+      const contents = document.querySelectorAll(".faqs-content");
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((item) => item.classList.remove("active"));
+          contents.forEach((content) => content.classList.remove("active"));
+
+          tab.classList.add("active");
+          const target = document.getElementById(tab.dataset.tab);
+          if (target) {
+            target.classList.add("active");
+          }
+        });
+      });
+
+      const accordions = document.querySelectorAll(".accordion-title-one");
+
+      accordions.forEach((button) => {
+        button.addEventListener("click", () => {
+          accordions.forEach((otherButton) => {
+            if (otherButton !== button) {
+              otherButton.classList.remove("active");
+              if (otherButton.nextElementSibling) {
+                otherButton.nextElementSibling.style.display = "none";
+              }
+            }
+          });
+
+          button.classList.toggle("active");
+          const content = button.nextElementSibling;
+          if (content) {
+            content.style.display = content.style.display === "block" ? "none" : "block";
+          }
+        });
+      });
+
+      const openFacultyVideo = document.getElementById("openFacultyVideo");
+      const facultyVideoModal = document.getElementById("facultyVideoModal");
+      const closeFacultyVideo = document.getElementById("closeFacultyVideo");
+      const facultyVideoFrame = document.getElementById("facultyVideoFrame");
+
+      if (openFacultyVideo && facultyVideoModal && closeFacultyVideo && facultyVideoFrame) {
+        openFacultyVideo.addEventListener("click", () => {
+          facultyVideoFrame.src = openFacultyVideo.dataset.videoSrc || "";
+          facultyVideoModal.classList.remove("hidden");
+          facultyVideoModal.setAttribute("aria-hidden", "false");
+        });
+
+        const hideFacultyVideo = () => {
+          facultyVideoModal.classList.add("hidden");
+          facultyVideoModal.setAttribute("aria-hidden", "true");
+          facultyVideoFrame.src = "";
+        };
+
+        closeFacultyVideo.addEventListener("click", hideFacultyVideo);
+
+        facultyVideoModal.addEventListener("click", (event) => {
+          if (event.target === facultyVideoModal) {
+            hideFacultyVideo();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && !facultyVideoModal.classList.contains("hidden")) {
+            hideFacultyVideo();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -164,11 +164,97 @@
       padding-top: 26px;
     }
 
+    .workshop-marquee {
+      padding: 14px 0 0;
+    }
+
+    .workshop-marquee-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: var(--shadow-dark);
+      padding: 12px 0;
+    }
+
+    .workshop-marquee-shell::before,
+    .workshop-marquee-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 72px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .workshop-marquee-shell::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(8, 26, 52, 1), rgba(8, 26, 52, 0));
+    }
+
+    .workshop-marquee-shell::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(8, 26, 52, 1), rgba(8, 26, 52, 0));
+    }
+
+    .workshop-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: workshopTickerMove 24s linear infinite;
+    }
+
+    .workshop-marquee-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-right: 12px;
+    }
+
+    .workshop-chip {
+      flex: 0 0 auto;
+      padding: 0.78rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-family: "Clash Display", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
     .ticker-section {
       padding: 8px 0 26px;
     }
 
+    .ticker-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+    }
+
+    .ticker-label {
+      min-height: 100%;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff8ef;
+      font-family: "Clash Display", sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
     .ticker-shell {
+      min-height: 100%;
       position: relative;
       overflow: hidden;
       border-radius: 999px;
@@ -614,6 +700,16 @@
       grid-template-columns: 1.05fr 0.95fr;
       gap: 16px;
       align-items: center;
+    }
+
+    .spotlight-copy {
+      transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
+    }
+
+    .spotlight-copy.is-switching {
+      opacity: 0;
+      transform: translateY(12px);
+      filter: blur(6px);
     }
 
     .spotlight p {
@@ -1458,6 +1554,11 @@
       to { transform: translateX(-50%); }
     }
 
+    @keyframes workshopTickerMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
     @keyframes floatSlow {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -1562,6 +1663,14 @@
         width: 34px;
       }
 
+      .ticker-row {
+        grid-template-columns: 1fr;
+      }
+
+      .ticker-label {
+        justify-self: start;
+      }
+
       .section-head {
         display: block;
       }
@@ -1642,6 +1751,29 @@
     </div>
   </header>
 
+  <section class="workshop-marquee" aria-label="Big Red Education workshops">
+    <div class="container">
+      <div class="workshop-marquee-shell reveal">
+        <div class="workshop-marquee-track">
+          <div class="workshop-marquee-group">
+            <div class="workshop-chip">Leadership &amp; Social Innovation Conference</div>
+            <div class="workshop-chip">Ivy League MUNC '26</div>
+            <div class="workshop-chip">InnovateNOW</div>
+            <div class="workshop-chip">Social Startup Bootcamp</div>
+            <div class="workshop-chip">Command Z: Future Tech Lab</div>
+          </div>
+          <div class="workshop-marquee-group" aria-hidden="true">
+            <div class="workshop-chip">Leadership &amp; Social Innovation Conference</div>
+            <div class="workshop-chip">Ivy League MUNC '26</div>
+            <div class="workshop-chip">InnovateNOW</div>
+            <div class="workshop-chip">Social Startup Bootcamp</div>
+            <div class="workshop-chip">Command Z: Future Tech Lab</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <main id="top">
     <section class="section hero">
       <div class="container hero-grid">
@@ -1703,25 +1835,28 @@
 
     <section class="ticker-section">
       <div class="container">
-        <div class="ticker-shell reveal" aria-label="School partners ticker">
-          <div class="ticker-track">
-            <div class="ticker-group">
-              <div class="ticker-logo">[Logo] Harvard</div>
-              <div class="ticker-logo">[Logo] Stanford</div>
-              <div class="ticker-logo">[Logo] Yale</div>
-              <div class="ticker-logo">[Logo] Princeton</div>
-              <div class="ticker-logo">[Logo] Columbia</div>
-              <div class="ticker-logo">[Logo] Cornell</div>
-              <div class="ticker-logo">[Logo] Northwestern</div>
-            </div>
-            <div class="ticker-group" aria-hidden="true">
-              <div class="ticker-logo">[Logo] Harvard</div>
-              <div class="ticker-logo">[Logo] Stanford</div>
-              <div class="ticker-logo">[Logo] Yale</div>
-              <div class="ticker-logo">[Logo] Princeton</div>
-              <div class="ticker-logo">[Logo] Columbia</div>
-              <div class="ticker-logo">[Logo] Cornell</div>
-              <div class="ticker-logo">[Logo] Northwestern</div>
+        <div class="ticker-row">
+          <div class="ticker-label reveal">Our Mentors Come From</div>
+          <div class="ticker-shell reveal" aria-label="School partners ticker">
+            <div class="ticker-track">
+              <div class="ticker-group">
+                <div class="ticker-logo">[Logo] Harvard</div>
+                <div class="ticker-logo">[Logo] Stanford</div>
+                <div class="ticker-logo">[Logo] Yale</div>
+                <div class="ticker-logo">[Logo] Princeton</div>
+                <div class="ticker-logo">[Logo] Columbia</div>
+                <div class="ticker-logo">[Logo] Cornell</div>
+                <div class="ticker-logo">[Logo] Northwestern</div>
+              </div>
+              <div class="ticker-group" aria-hidden="true">
+                <div class="ticker-logo">[Logo] Harvard</div>
+                <div class="ticker-logo">[Logo] Stanford</div>
+                <div class="ticker-logo">[Logo] Yale</div>
+                <div class="ticker-logo">[Logo] Princeton</div>
+                <div class="ticker-logo">[Logo] Columbia</div>
+                <div class="ticker-logo">[Logo] Cornell</div>
+                <div class="ticker-logo">[Logo] Northwestern</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1791,14 +1926,14 @@
 
         <div class="workshop-grid">
           <article class="light-panel spotlight reveal">
-            <div>
-              <div class="eyebrow" style="background:rgba(217,13,50,0.08); color:var(--red); border-color:rgba(217,13,50,0.12);">Featured Conference</div>
-              <h3 style="font-size:clamp(1.9rem,3vw,2.8rem); line-height:1; color:var(--ink); margin-top:16px;">Leadership &amp; Social Innovation Conference</h3>
-              <p>
+            <div class="spotlight-copy" id="featuredWorkshopCopy">
+              <div class="eyebrow" id="featuredWorkshopLabel" style="background:rgba(217,13,50,0.08); color:var(--red); border-color:rgba(217,13,50,0.12);">Featured Conference</div>
+              <h3 id="featuredWorkshopTitle" style="font-size:clamp(1.9rem,3vw,2.8rem); line-height:1; color:var(--ink); margin-top:16px;">Leadership &amp; Social Innovation Conference</h3>
+              <p id="featuredWorkshopText">
                 Big Red’s conference programming is positioned around leadership, social innovation, and meaningful student interaction.
                 It reflects the site’s emphasis on stronger student voice, action, and perspective.
               </p>
-              <div class="pill-row">
+              <div class="pill-row" id="featuredWorkshopPills">
                 <div class="light-pill">Leadership</div>
                 <div class="light-pill">Social impact</div>
                 <div class="light-pill">Conference format</div>
@@ -2154,6 +2289,29 @@
     </div>
   </div>
 
+  <section class="workshop-marquee" aria-label="Big Red Education workshops">
+    <div class="container">
+      <div class="workshop-marquee-shell reveal">
+        <div class="workshop-marquee-track">
+          <div class="workshop-marquee-group">
+            <div class="workshop-chip">Leadership &amp; Social Innovation Conference</div>
+            <div class="workshop-chip">Ivy League MUNC '26</div>
+            <div class="workshop-chip">InnovateNOW</div>
+            <div class="workshop-chip">Social Startup Bootcamp</div>
+            <div class="workshop-chip">Command Z: Future Tech Lab</div>
+          </div>
+          <div class="workshop-marquee-group" aria-hidden="true">
+            <div class="workshop-chip">Leadership &amp; Social Innovation Conference</div>
+            <div class="workshop-chip">Ivy League MUNC '26</div>
+            <div class="workshop-chip">InnovateNOW</div>
+            <div class="workshop-chip">Social Startup Bootcamp</div>
+            <div class="workshop-chip">Command Z: Future Tech Lab</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-card reveal">
@@ -2304,6 +2462,77 @@
       testimonialName.textContent = current.name;
       testimonialRole.textContent = current.role;
     }, 4200);
+
+    const featuredWorkshopLabel = document.getElementById("featuredWorkshopLabel");
+    const featuredWorkshopTitle = document.getElementById("featuredWorkshopTitle");
+    const featuredWorkshopText = document.getElementById("featuredWorkshopText");
+    const featuredWorkshopPills = document.getElementById("featuredWorkshopPills");
+    const featuredWorkshopCopy = document.getElementById("featuredWorkshopCopy");
+
+    const featuredWorkshopData = [
+      {
+        label: "Featured Conference",
+        title: "Leadership & Social Innovation Conference",
+        text: "Big Red’s conference programming is positioned around leadership, social innovation, and meaningful student interaction. It reflects the site’s emphasis on stronger student voice, action, and perspective.",
+        pills: ["Leadership", "Social impact", "Conference format"]
+      },
+      {
+        label: "Featured Workshop",
+        title: "Ivy League MUNC '26",
+        text: "A diplomacy-driven experience for students who want stronger debate skills, global awareness, and the confidence to participate in high-level discussion.",
+        pills: ["Model UN", "Debate", "Global thinking"]
+      },
+      {
+        label: "Featured Program",
+        title: "InnovateNOW",
+        text: "An innovation-focused experience that encourages students to think creatively, work through real problems, and build sharper solution-first thinking.",
+        pills: ["Innovation", "Problem solving", "Creative thinking"]
+      },
+      {
+        label: "Featured Bootcamp",
+        title: "Social Startup Bootcamp",
+        text: "An entrepreneurial experience built around initiative, purpose-driven ideas, and helping students understand how impact and execution can work together.",
+        pills: ["Entrepreneurship", "Social change", "Initiative"]
+      },
+      {
+        label: "Featured Future-Tech Lab",
+        title: "Command Z: Future Tech Lab",
+        text: "A future-facing program that introduces students to AI, creative technology, trendspotting, and hands-on digital experimentation in an immersive format.",
+        pills: ["AI", "Future tech", "Hands-on learning"]
+      }
+    ];
+
+    let featuredWorkshopIndex = 0;
+
+    function renderFeaturedWorkshop() {
+      if (!featuredWorkshopLabel || !featuredWorkshopTitle || !featuredWorkshopText || !featuredWorkshopPills) {
+        return;
+      }
+
+      const current = featuredWorkshopData[featuredWorkshopIndex];
+      featuredWorkshopLabel.textContent = current.label;
+      featuredWorkshopTitle.textContent = current.title;
+      featuredWorkshopText.textContent = current.text;
+      featuredWorkshopPills.innerHTML = current.pills
+        .map((pill) => `<div class="light-pill">${pill}</div>`)
+        .join("");
+    }
+
+    setInterval(() => {
+      if (!featuredWorkshopCopy) {
+        featuredWorkshopIndex = (featuredWorkshopIndex + 1) % featuredWorkshopData.length;
+        renderFeaturedWorkshop();
+        return;
+      }
+
+      featuredWorkshopCopy.classList.add("is-switching");
+
+      window.setTimeout(() => {
+        featuredWorkshopIndex = (featuredWorkshopIndex + 1) % featuredWorkshopData.length;
+        renderFeaturedWorkshop();
+        featuredWorkshopCopy.classList.remove("is-switching");
+      }, 260);
+    }, 5000);
 
     const reveals = document.querySelectorAll(".reveal");
     reveals.forEach((item, index) => {

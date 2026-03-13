@@ -138,7 +138,7 @@
     }
 
     .button:hover {
-      transform: translateY(-1px);
+      transform: translateY(-3px) scale(1.01);
     }
 
     .button-primary {
@@ -155,6 +155,68 @@
 
     .page-shell {
       padding: 26px 0 52px;
+    }
+
+    .workshop-marquee {
+      padding: 14px 0 0;
+    }
+
+    .workshop-marquee-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: var(--shadow-dark);
+      padding: 12px 0;
+    }
+
+    .workshop-marquee-shell::before,
+    .workshop-marquee-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 72px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .workshop-marquee-shell::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(8, 26, 52, 1), rgba(8, 26, 52, 0));
+    }
+
+    .workshop-marquee-shell::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(8, 26, 52, 1), rgba(8, 26, 52, 0));
+    }
+
+    .workshop-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: workshopTickerMove 24s linear infinite;
+    }
+
+    .workshop-marquee-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-right: 12px;
+    }
+
+    .workshop-chip {
+      flex: 0 0 auto;
+      padding: 0.78rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-family: "Clash Display", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
     }
 
     .page-grid {
@@ -217,6 +279,7 @@
       border-radius: 50%;
       background: radial-gradient(circle, rgba(217, 228, 107, 0.32), transparent 70%);
       pointer-events: none;
+      animation: heroGlow 7s ease-in-out infinite;
     }
 
     .eyebrow {
@@ -393,6 +456,12 @@
       background: rgba(255, 255, 255, 0.96);
       border: 1px solid rgba(30, 29, 64, 0.08);
       box-shadow: var(--shadow-light);
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 60px rgba(30, 29, 64, 0.16);
     }
 
     .stat-value {
@@ -426,6 +495,13 @@
       border-radius: var(--radius-lg);
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .module-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(217, 228, 107, 0.24);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.18);
     }
 
     .module-index {
@@ -460,6 +536,12 @@
       border-radius: var(--radius-md);
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 220ms ease, background 220ms ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.1);
     }
 
     .timeline-time {
@@ -480,6 +562,12 @@
       border-radius: var(--radius-lg);
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .pricing-block:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.16);
     }
 
     .price-tag {
@@ -719,6 +807,60 @@
       opacity: 0.28;
     }
 
+    .mayo-carousel-shell {
+      overflow: hidden;
+      margin-top: 18px;
+      border-radius: 26px;
+      position: relative;
+    }
+
+    .mayo-carousel-track {
+      display: flex;
+      gap: 16px;
+      transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .mayo-card {
+      min-width: calc((100% - 32px) / 3);
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow-dark);
+      transition: transform 320ms ease, opacity 320ms ease, border-color 320ms ease;
+      opacity: 0.58;
+      transform: scale(0.94);
+    }
+
+    .mayo-card.is-active {
+      opacity: 1;
+      transform: scale(1);
+      border-color: rgba(217, 228, 107, 0.28);
+    }
+
+    .mayo-card-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      color: #fff8ef;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .mayo-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .mayo-card p {
+      color: rgba(244, 239, 233, 0.72);
+    }
+
     .video-placeholder-inner {
       position: relative;
       z-index: 1;
@@ -834,6 +976,79 @@
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
       padding: 16px 18px;
+      transition: transform 220ms ease, background 220ms ease;
+    }
+
+    details:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px) scale(0.985);
+      filter: blur(8px);
+      transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1), transform 800ms cubic-bezier(0.22, 1, 0.36, 1), filter 800ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes heroGlow {
+      0%, 100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.06); }
+    }
+
+    @keyframes workshopTickerMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes boxDrift {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(0, -5px, 0); }
+    }
+
+    .stat-card,
+    .module-card,
+    .timeline-item,
+    .pricing-block,
+    .accordion-item-faqs {
+      animation: boxDrift 6.6s ease-in-out infinite;
+    }
+
+    .stat-card:nth-child(2n),
+    .module-card:nth-child(2n),
+    .timeline-item:nth-child(2n),
+    .pricing-block:nth-child(2n),
+    .accordion-item-faqs:nth-child(2n) {
+      animation-duration: 7.4s;
+      animation-delay: 0.35s;
+    }
+
+    .stat-card:nth-child(3n),
+    .module-card:nth-child(3n),
+    .timeline-item:nth-child(3n),
+    .pricing-block:nth-child(3n),
+    .accordion-item-faqs:nth-child(3n) {
+      animation-duration: 8.1s;
+      animation-delay: 0.75s;
+    }
+
+    .stat-card:hover,
+    .module-card:hover,
+    .timeline-item:hover,
+    .pricing-block:hover,
+    .accordion-item-faqs:hover {
+      animation-play-state: paused;
     }
 
     summary {
@@ -1053,6 +1268,10 @@
         grid-template-columns: 1fr 1fr;
       }
 
+      .mayo-card {
+        min-width: calc((100% - 16px) / 2);
+      }
+
       .footer-card {
         grid-template-columns: 1fr 1fr;
       }
@@ -1073,6 +1292,10 @@
       .stats-strip,
       .modules-grid {
         grid-template-columns: 1fr;
+      }
+
+      .mayo-card {
+        min-width: 100%;
       }
 
       .footer-card {
@@ -1097,6 +1320,20 @@
         font-size: clamp(2.5rem, 14vw, 4rem);
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1116,6 +1353,29 @@
       <a class="button button-primary" href="#apply">Apply Now</a>
     </div>
   </header>
+
+  <section class="workshop-marquee" aria-label="Big Red Education workshops">
+    <div class="container">
+      <div class="workshop-marquee-shell">
+        <div class="workshop-marquee-track">
+          <div class="workshop-marquee-group">
+            <div class="workshop-chip">Leadership &amp; Social Innovation Conference</div>
+            <div class="workshop-chip">Ivy League MUNC '26</div>
+            <div class="workshop-chip">InnovateNOW</div>
+            <div class="workshop-chip">Social Startup Bootcamp</div>
+            <div class="workshop-chip">Command Z: Future Tech Lab</div>
+          </div>
+          <div class="workshop-marquee-group" aria-hidden="true">
+            <div class="workshop-chip">Leadership &amp; Social Innovation Conference</div>
+            <div class="workshop-chip">Ivy League MUNC '26</div>
+            <div class="workshop-chip">InnovateNOW</div>
+            <div class="workshop-chip">Social Startup Bootcamp</div>
+            <div class="workshop-chip">Command Z: Future Tech Lab</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <main class="page-shell" id="top">
     <div class="container page-grid">
@@ -1351,6 +1611,47 @@
               </div>
             </div>
           </article>
+        </section>
+
+        <section class="section panel panel-light section-card" id="mayo-life">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Beyond The Lab</div>
+              <h2>Your 5-9 life at Mayo post 9-5!</h2>
+            </div>
+          </div>
+          <p>
+            After the workshop day winds down, students can enjoy a richer campus rhythm with activities that make the residential experience feel memorable, social, and distinctly Mayo.
+          </p>
+          <div class="mayo-carousel-shell">
+            <div class="mayo-carousel-track" id="mayoCarouselTrack">
+              <article class="mayo-card is-active">
+                <div class="mayo-card-index">01</div>
+                <h3>Horse riding</h3>
+                <p>Experience one of Mayo’s most distinctive campus traditions in a setting built for confidence and adventure.</p>
+              </article>
+              <article class="mayo-card">
+                <div class="mayo-card-index">02</div>
+                <h3>Movie watching</h3>
+                <p>Unwind with the group through easy evening screenings that bring everyone together after an immersive day.</p>
+              </article>
+              <article class="mayo-card">
+                <div class="mayo-card-index">03</div>
+                <h3>Golf</h3>
+                <p>Spend post-workshop hours around one of the campus’s elegant recreational experiences.</p>
+              </article>
+              <article class="mayo-card">
+                <div class="mayo-card-index">04</div>
+                <h3>Museum tour</h3>
+                <p>Explore the heritage and character of Mayo through a guided visit that adds context to the campus experience.</p>
+              </article>
+              <article class="mayo-card">
+                <div class="mayo-card-index">05</div>
+                <h3>Star gazing</h3>
+                <p>Close the day with quiet sky-viewing moments that make the residential atmosphere feel even more special.</p>
+              </article>
+            </div>
+          </div>
         </section>
 
         <section class="section panel panel-light section-card" id="pricing">
@@ -1698,6 +1999,54 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      const revealTargets = document.querySelectorAll(
+        ".hero-card, .stats-strip, .info-grid, .section-card, .cta-band, .form-column, .footer-card, .footer-bottom"
+      );
+
+      revealTargets.forEach((item, index) => {
+        item.classList.add("reveal");
+        item.style.transitionDelay = Math.min(index * 50, 260) + "ms";
+      });
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealTargets.forEach((item) => revealObserver.observe(item));
+
+      const mayoCarouselTrack = document.getElementById("mayoCarouselTrack");
+      const mayoCards = mayoCarouselTrack ? Array.from(mayoCarouselTrack.querySelectorAll(".mayo-card")) : [];
+      let mayoCarouselIndex = 0;
+
+      const updateMayoCarousel = () => {
+        if (!mayoCarouselTrack || mayoCards.length === 0) {
+          return;
+        }
+
+        mayoCards.forEach((card, index) => {
+          card.classList.toggle("is-active", index === mayoCarouselIndex);
+        });
+
+        const cardWidth = mayoCards[0].offsetWidth;
+        const gap = 16;
+        mayoCarouselTrack.style.transform = `translateX(-${mayoCarouselIndex * (cardWidth + gap)}px)`;
+      };
+
+      if (mayoCards.length > 0) {
+        updateMayoCarousel();
+
+        window.addEventListener("resize", updateMayoCarousel);
+
+        window.setInterval(() => {
+          mayoCarouselIndex = (mayoCarouselIndex + 1) % mayoCards.length;
+          updateMayoCarousel();
+        }, 2600);
+      }
+
       const tabs = document.querySelectorAll(".tabf");
       const contents = document.querySelectorAll(".faqs-content");
 

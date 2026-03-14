@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Big Red Education</title>
+  <title>Big Red Education Light Mode</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Clash+Display:wght@500;600;700&family=Cormorant+Garamond:ital,wght@1,700&display=swap");
 
@@ -74,7 +74,7 @@
       width: 100%;
       max-width: none;
       margin: 0;
-      padding-inline: 24px;
+      padding-inline: 5%;
     }
 
     .site-header {
@@ -715,152 +715,78 @@
       background: #edf2f7;
     }
 
-    .workshop-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-    }
-
-    .spotlight {
-      padding: 28px;
-      min-height: 330px;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .spotlight-copy {
-      transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
-    }
-
-    .spotlight-copy.is-switching {
-      opacity: 0;
-      transform: translateY(12px);
-      filter: blur(6px);
-    }
-
-    .spotlight p {
-      color: rgba(244, 239, 233, 0.76);
-      margin-top: 14px;
-      line-height: 1.7;
-    }
-
-    .spotlight-media {
-      min-height: 240px;
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at top left, rgba(217, 13, 50, 0.16), transparent 22%),
-        linear-gradient(180deg, #d7ebf5, #f6e7da);
-      position: relative;
+    .program-carousel-shell {
       overflow: hidden;
+      margin-top: 18px;
+      border-radius: 26px;
+      position: relative;
     }
 
-    .spotlight-media::before {
-      content: "";
-      position: absolute;
-      top: 16%;
-      left: 50%;
-      width: 84px;
-      height: 84px;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      background: #d1a481;
+    .program-carousel-track {
+      display: flex;
+      gap: 16px;
+      transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
     }
 
-    .spotlight-media::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -6%;
-      width: 66%;
-      height: 72%;
-      transform: translateX(-50%);
-      border-radius: 38% 38% 10% 10%;
-      background: #f8fbff;
-    }
-
-    .workshop-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .mini-card {
+    .program-card {
+      min-width: calc((100% - 32px) / 3);
       padding: 18px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #f4efe9;
-      box-shadow: var(--shadow-dark);
-      transition: transform 220ms ease, box-shadow 220ms ease;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(252, 244, 236, 0.92));
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      box-shadow: var(--shadow-light);
+      transition: transform 320ms ease, opacity 320ms ease, border-color 320ms ease;
+      opacity: 0.58;
+      transform: scale(0.94);
     }
 
-    .mini-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 26px 60px rgba(30, 29, 64, 0.14);
+    .program-card.is-active {
+      opacity: 1;
+      transform: scale(1);
+      border-color: rgba(217, 228, 107, 0.28);
     }
 
-    .mini-card-media {
-      height: 160px;
+    .program-card-media {
+      height: 180px;
       border-radius: 18px;
       margin-bottom: 16px;
-      position: relative;
       overflow: hidden;
-      background:
-        radial-gradient(circle at top left, rgba(217, 13, 50, 0.16), transparent 22%),
-        linear-gradient(180deg, #d7ebf5, #f6e7da);
+      background: rgba(31, 35, 64, 0.05);
     }
 
-    .mini-card-media::before {
-      content: "";
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      width: 54px;
-      height: 54px;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      background: rgba(30, 29, 64, 0.18);
+    .program-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .mini-card-media::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -10px;
-      width: 68%;
-      height: 62%;
-      transform: translateX(-50%);
-      border-radius: 42% 42% 10% 10%;
-      background: rgba(255, 255, 255, 0.88);
-    }
-
-    .mini-card-label {
-      position: absolute;
-      left: 14px;
-      bottom: 14px;
-      z-index: 1;
-      padding: 0.45rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(30, 29, 64, 0.82);
+    .program-card-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--red), var(--blue));
       color: #fff8ef;
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-weight: 800;
+      margin-bottom: 14px;
     }
 
-    .mini-card h3 {
-      font-size: 1.18rem;
+    .program-card h3 {
+      font-size: 1.2rem;
       margin-bottom: 8px;
+      color: var(--ink);
     }
 
-    .mini-card p {
-      color: rgba(244, 239, 233, 0.74);
+    .program-card p {
+      color: var(--muted);
       line-height: 1.55;
     }
 
-    .mini-card-link {
+    .program-card-link {
       display: block;
       color: inherit;
       text-decoration: none;
@@ -869,6 +795,66 @@
     .mentor-section {
       display: grid;
       gap: 18px;
+    }
+
+    .partners-section {
+      display: grid;
+      gap: 18px;
+    }
+
+    .partners-shell {
+      padding: 28px;
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .partner-card {
+      min-height: 132px;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(252, 244, 236, 0.92));
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      box-shadow: var(--shadow-light);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .partner-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px rgba(31, 35, 64, 0.12);
+    }
+
+    .partner-placeholder {
+      width: 76px;
+      height: 76px;
+      border-radius: 22px;
+      background: rgba(31, 35, 64, 0.05);
+      border: 1px dashed rgba(31, 35, 64, 0.14);
+      display: grid;
+      place-items: center;
+      color: rgba(31, 35, 64, 0.42);
+      font-family: "Clash Display", sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: -0.03em;
+    }
+
+    .partner-card img {
+      max-width: 100%;
+      max-height: 96px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .partner-card img.logo-keep-size {
+      max-height: 72px;
     }
 
     .mentor-grid {
@@ -1643,7 +1629,6 @@
     @media (max-width: 1100px) {
       .hero-grid,
       .cred-grid,
-      .workshop-grid,
       .story-grid,
       .footprint-grid,
       .apply-panel,
@@ -1660,8 +1645,8 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .workshop-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .program-card {
+        min-width: calc((100% - 16px) / 2);
       }
     }
 
@@ -1685,8 +1670,12 @@
       .footprint-stats,
       .mentor-grid,
       .step-grid,
-      .workshop-list {
+      .partners-grid {
         grid-template-columns: 1fr;
+      }
+
+      .program-card {
+        min-width: 100%;
       }
 
       .footer-card {
@@ -1768,6 +1757,309 @@
         transform: none;
       }
     }
+    /* Light mode overrides */
+    :root {
+      --bg: #f6f3ee;
+      --bg-deep: #fffdf9;
+      --panel: #ffffff;
+      --panel-soft: #fff8f2;
+      --ink: #1f2340;
+      --muted: #66657a;
+      --line-dark: rgba(31, 35, 64, 0.08);
+      --line-light: rgba(31, 35, 64, 0.1);
+      --shadow-dark: 0 24px 70px rgba(31, 35, 64, 0.1);
+      --shadow-light: 0 22px 56px rgba(31, 35, 64, 0.1);
+    }
+
+    body {
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(74, 176, 217, 0.12), transparent 20%),
+        radial-gradient(circle at 88% 8%, rgba(217, 13, 50, 0.08), transparent 18%),
+        linear-gradient(180deg, #fffdf9 0%, #f8f4ef 54%, #f2ece5 100%);
+    }
+
+    body::before {
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(31, 35, 64, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 35, 64, 0.05) 1px, transparent 1px);
+    }
+
+    .site-header {
+      background: rgba(255, 252, 247, 0.86);
+      border-bottom: 1px solid rgba(31, 35, 64, 0.08);
+    }
+
+    .brand,
+    .nav a:hover {
+      color: var(--ink);
+    }
+
+    .nav {
+      color: rgba(31, 35, 64, 0.68);
+    }
+
+    .button-secondary {
+      color: var(--ink);
+      background: rgba(31, 35, 64, 0.05);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+    }
+
+    .workshop-marquee-shell,
+    .ticker-shell {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(249, 243, 236, 0.94));
+      border: 1px solid rgba(31, 35, 64, 0.12);
+      box-shadow: 0 18px 44px rgba(31, 35, 64, 0.12);
+    }
+
+    .workshop-marquee-shell::before,
+    .ticker-shell::before {
+      background: linear-gradient(90deg, rgba(250, 245, 239, 1), rgba(250, 245, 239, 0));
+    }
+
+    .workshop-marquee-shell::after,
+    .ticker-shell::after {
+      background: linear-gradient(270deg, rgba(250, 245, 239, 1), rgba(250, 245, 239, 0));
+    }
+
+    .workshop-chip {
+      background: rgba(31, 35, 64, 0.08);
+      border: 1px solid rgba(31, 35, 64, 0.12);
+      color: var(--ink);
+      box-shadow: 0 10px 24px rgba(31, 35, 64, 0.08);
+    }
+
+    .ticker-label {
+      background: rgba(31, 35, 64, 0.04);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      color: var(--ink);
+    }
+
+    .hero-kicker,
+    .hero-subcopy,
+    .hero-summary,
+    .section-head p {
+      color: rgba(31, 35, 64, 0.72);
+    }
+
+    .hero-meta,
+    .hero-meta span {
+      color: rgba(31, 35, 64, 0.76);
+    }
+
+    .hero-kicker strong,
+    .hero-standout,
+    .section-head h2,
+    .section-head .eyebrow,
+    .footer-brand {
+      color: var(--ink);
+    }
+
+    .hero-stat,
+    .speaker-card,
+    .video-chip {
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--ink);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      box-shadow: var(--shadow-light);
+    }
+
+    .hero-stat span,
+    .speaker-card span {
+      color: rgba(31, 35, 64, 0.66);
+    }
+
+    .light-panel,
+    .mini-card,
+    .mentor-card,
+    .faq-intro,
+    .faq-item,
+    .step,
+    .footprint-stat,
+    .apply-side {
+      background:
+        radial-gradient(circle at top right, rgba(74, 176, 217, 0.08), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 249, 243, 0.92));
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      box-shadow: var(--shadow-light);
+      color: var(--ink);
+    }
+
+    .light-pill {
+      background: rgba(31, 35, 64, 0.06);
+      color: var(--ink);
+    }
+
+    .cred-copy p,
+    .metric-card span,
+    .spotlight p,
+    .mini-card p,
+    .mentor-card p,
+    .story-card p,
+    .step p,
+    .footprint-copy p,
+    .footprint-stat span,
+    .apply-panel p,
+    .faq-intro p,
+    .faq-answer,
+    .summer-note {
+      color: var(--muted);
+    }
+
+    .metric-card {
+      background: rgba(31, 35, 64, 0.04);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+    }
+
+    .quote-card {
+      background:
+        radial-gradient(circle at top right, rgba(74, 176, 217, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(253, 243, 236, 0.94));
+      color: var(--ink);
+    }
+
+    .quote-text,
+    .person strong,
+    .footprint-copy h2,
+    .footprint-stat strong,
+    .apply-side,
+    .faq-item button,
+    .faq-intro h2,
+    .story-card h2,
+    .path-panel h2 {
+      color: var(--ink) !important;
+    }
+
+    .eyebrow {
+      color: var(--ink);
+      background: rgba(31, 35, 64, 0.06);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+    }
+
+    .eyebrow::before {
+      background: var(--sky);
+    }
+
+    #featuredWorkshopLabel,
+    #featuredWorkshopTitle,
+    #testimonialRole,
+    #applyModalTitle {
+      color: var(--ink) !important;
+    }
+
+    #featuredWorkshopLabel {
+      background: rgba(217, 13, 50, 0.08) !important;
+      border-color: rgba(217, 13, 50, 0.14) !important;
+      color: var(--red) !important;
+    }
+
+    #testimonialRole {
+      color: var(--muted) !important;
+    }
+
+    .path-panel .section-head p,
+    .apply-panel p,
+    .faq-intro p {
+      color: var(--muted) !important;
+    }
+
+    #apply .eyebrow,
+    #faq .eyebrow,
+    .footprint-copy .eyebrow {
+      color: var(--ink) !important;
+      background: rgba(31, 35, 64, 0.06) !important;
+      border-color: rgba(31, 35, 64, 0.08) !important;
+    }
+
+    #apply h2,
+    #faq h2 {
+      color: var(--ink) !important;
+    }
+
+    .footprint-board {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+    }
+
+    .footprint-board::before {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(31, 35, 64, 0.06));
+    }
+
+    .apply-modal {
+      background: rgba(228, 220, 211, 0.62);
+    }
+
+    .apply-modal-panel,
+    .summer-modal-panel {
+      background: rgba(255, 253, 249, 0.94);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      color: var(--ink);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .apply-modal-top p,
+    .summer-subtitle {
+      color: var(--muted);
+    }
+
+    .crm-shell,
+    .summer-shell {
+      background: rgba(31, 35, 64, 0.03);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+    }
+
+    .summer-badge {
+      background: rgba(31, 35, 64, 0.06);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      color: var(--ink);
+    }
+
+    .summer-title {
+      color: var(--ink);
+    }
+
+    .summer-title .accent {
+      color: #448a4b;
+    }
+
+    .summer-field label,
+    .form-kicker {
+      color: var(--ink);
+    }
+
+    .summer-field input {
+      background: rgba(31, 35, 64, 0.04);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      color: var(--ink);
+    }
+
+    .summer-field input::placeholder {
+      color: rgba(31, 35, 64, 0.45);
+    }
+
+    .apply-close {
+      background: rgba(31, 35, 64, 0.05);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      color: var(--ink);
+    }
+
+    .footer-card {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(31, 35, 64, 0.08);
+      box-shadow: var(--shadow-dark);
+      color: var(--ink);
+    }
+
+    .footer-card p,
+    .footer-links,
+    .footer-col a,
+    .footer-col div,
+    .footer-bottom,
+    .footer-bottom a {
+      color: rgba(31, 35, 64, 0.72);
+    }
+
   </style>
 </head>
 <body>
@@ -1937,61 +2229,66 @@
           </div>
           <p>
             Content here is based on Big Red Education’s live workshop and event pages, including the Leadership & Social Innovation Conference,
-            Ivy League MUNC ’26, InnovateNOW, Social Startup Bootcamp, and Command Z: Future Tech Lab.
+            Ivy League MUNC ’26, InnovateNOW, Social Startup Bootcamp, Youth Leadership Bootcamp, and Command Z: Future Tech Lab.
           </p>
         </div>
 
-        <div class="workshop-grid">
-          <article class="light-panel spotlight reveal">
-            <div class="spotlight-copy" id="featuredWorkshopCopy">
-              <div class="eyebrow" id="featuredWorkshopLabel" style="background:rgba(217,13,50,0.12); color:#ffd8df; border-color:rgba(217,13,50,0.18);">Featured Conference</div>
-              <h3 id="featuredWorkshopTitle" style="font-size:clamp(1.9rem,3vw,2.8rem); line-height:1; color:#fff8ef; margin-top:16px;">Leadership &amp; Social Innovation Conference</h3>
-              <p id="featuredWorkshopText">
-                Big Red’s conference programming is positioned around leadership, social innovation, and meaningful student interaction.
-                It reflects the site’s emphasis on stronger student voice, action, and perspective.
-              </p>
-              <div class="pill-row" id="featuredWorkshopPills">
-                <div class="light-pill">Leadership</div>
-                <div class="light-pill">Social impact</div>
-                <div class="light-pill">Conference format</div>
-              </div>
-            </div>
-            <div class="spotlight-media" aria-hidden="true"></div>
-          </article>
-
-          <div class="workshop-list">
-            <article class="mini-card reveal">
-              <div class="mini-card-media" aria-label="Ivy League MUNC creative placeholder">
-                <div class="mini-card-label">Add creative</div>
-              </div>
-              <h3>Ivy League MUNC ’26</h3>
-              <p>Model UN style exposure built for students interested in diplomacy, global thinking, and debate-led confidence.</p>
-            </article>
-            <article class="mini-card reveal">
-              <div class="mini-card-media" aria-label="InnovateNOW creative placeholder">
-                <div class="mini-card-label">Add creative</div>
-              </div>
-              <h3>InnovateNOW</h3>
-              <p>An innovation-oriented experience designed to help students think creatively and solve problems with structure.</p>
-            </article>
-            <article class="mini-card reveal">
-              <div class="mini-card-media" aria-label="Social Startup Bootcamp creative placeholder">
-                <div class="mini-card-label">Add creative</div>
-              </div>
-              <h3>Social Startup Bootcamp</h3>
-              <p>Entrepreneurship and impact-driven thinking for students exploring ideas, initiative, and social change.</p>
-            </article>
-            <article class="mini-card reveal">
-              <a class="mini-card-link" href="./command-z-workshop.html">
-                <div class="mini-card-media" aria-label="Command Z Future Tech Lab creative placeholder">
-                  <div class="mini-card-label">Add creative</div>
+        <article class="light-panel partners-shell reveal">
+          <div class="program-carousel-shell">
+            <div class="program-carousel-track" id="programCarouselTrack">
+              <article class="program-card is-active">
+                <div class="program-card-media">
+                  <img src="./assets/program/leadership and social innovation confrence@3x.png" alt="Leadership and Social Innovation Conference artwork">
                 </div>
-                <h3>Command Z: Future Tech Lab</h3>
-                <p>A future-facing tech experience oriented around curiosity, experimentation, and applied learning.</p>
-              </a>
-            </article>
+                <div class="program-card-index">01</div>
+                <h3>Leadership &amp; Social Innovation Conference</h3>
+                <p>Leadership, social impact, and stronger student voice through an ambitious conference format.</p>
+              </article>
+              <article class="program-card">
+                <div class="program-card-media">
+                  <img src="./assets/program/ilmunc 2026@3x.png" alt="Ivy League MUNC artwork">
+                </div>
+                <div class="program-card-index">02</div>
+                <h3>Ivy League MUNC '26</h3>
+                <p>Model UN exposure built for diplomacy, debate, and globally aware student participation.</p>
+              </article>
+              <article class="program-card">
+                <div class="program-card-media">
+                  <img src="./assets/program/Innovate now@3x.jpg" alt="InnovateNOW artwork">
+                </div>
+                <div class="program-card-index">03</div>
+                <h3>InnovateNOW</h3>
+                <p>An innovation-first workshop designed to strengthen creative thinking and problem solving.</p>
+              </article>
+              <article class="program-card">
+                <div class="program-card-media">
+                  <img src="./assets/program/social startup@3x.png" alt="Social Startup Bootcamp artwork">
+                </div>
+                <div class="program-card-index">04</div>
+                <h3>Social Startup Bootcamp</h3>
+                <p>Entrepreneurship and impact-driven thinking for students exploring ideas and initiative.</p>
+              </article>
+              <article class="program-card">
+                <div class="program-card-media">
+                  <img src="./assets/program/yuth leadership bootcamp@3x.png" alt="Youth Leadership Bootcamp artwork">
+                </div>
+                <div class="program-card-index">05</div>
+                <h3>Youth Leadership Bootcamp</h3>
+                <p>A leadership-centered experience focused on confidence, collaboration, and student presence.</p>
+              </article>
+              <article class="program-card">
+                <a class="program-card-link" href="./command-z-workshop.html">
+                  <div class="program-card-media">
+                    <img src="./assets/program/command z@3x.png" alt="Command Z Future Tech Lab artwork">
+                  </div>
+                  <div class="program-card-index">06</div>
+                  <h3>Command Z: Future Tech Lab</h3>
+                  <p>A future-facing tech experience centered on curiosity, experimentation, and applied learning.</p>
+                </a>
+              </article>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
@@ -2040,6 +2337,41 @@
             <p>Supports student development through workshop practice and guided reflection.</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="partners">
+      <div class="container partners-section">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow">Partners</div>
+            <h2>We work with elite universities&amp; organisations</h2>
+          </div>
+          <p>
+            Use this section to showcase BRE partner institutions and organisations. Each placeholder is ready to be replaced with a real logo.
+          </p>
+        </div>
+
+        <article class="light-panel partners-shell reveal">
+          <div class="partners-grid">
+            <div class="partner-card"><img src="./assets/logos/1.png" alt="Partner logo 1"></div>
+            <div class="partner-card"><img src="./assets/logos/2.png" alt="Partner logo 2"></div>
+            <div class="partner-card"><img src="./assets/logos/3.png" alt="Partner logo 3"></div>
+            <div class="partner-card"><img src="./assets/logos/4.png" alt="Partner logo 4"></div>
+            <div class="partner-card"><img src="./assets/logos/5.png" alt="Partner logo 5"></div>
+            <div class="partner-card"><img src="./assets/logos/6.png" alt="Partner logo 6"></div>
+            <div class="partner-card"><img src="./assets/logos/7.png" alt="Partner logo 7"></div>
+            <div class="partner-card"><img src="./assets/logos/8.png" alt="Partner logo 8"></div>
+            <div class="partner-card"><img src="./assets/logos/9.png" alt="Partner logo 9"></div>
+            <div class="partner-card"><img src="./assets/logos/Untitled design 1.png" alt="Partner logo 10"></div>
+            <div class="partner-card"><img class="logo-keep-size" src="./assets/logos/image 291.png" alt="Partner logo 11"></div>
+            <div class="partner-card"><img src="./assets/logos/image 292.png" alt="Partner logo 12"></div>
+            <div class="partner-card"><img class="logo-keep-size" src="./assets/logos/image 293.png" alt="Partner logo 13"></div>
+            <div class="partner-card"><img src="./assets/logos/image 294.png" alt="Partner logo 14"></div>
+            <div class="partner-card"><img src="./assets/logos/image 295.png" alt="Partner logo 15"></div>
+            <div class="partner-card"><div class="partner-placeholder">Logo 16</div></div>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -2503,76 +2835,33 @@
       testimonialRole.textContent = current.role;
     }, 4200);
 
-    const featuredWorkshopLabel = document.getElementById("featuredWorkshopLabel");
-    const featuredWorkshopTitle = document.getElementById("featuredWorkshopTitle");
-    const featuredWorkshopText = document.getElementById("featuredWorkshopText");
-    const featuredWorkshopPills = document.getElementById("featuredWorkshopPills");
-    const featuredWorkshopCopy = document.getElementById("featuredWorkshopCopy");
+    const programCarouselTrack = document.getElementById("programCarouselTrack");
+    const programCards = programCarouselTrack ? Array.from(programCarouselTrack.querySelectorAll(".program-card")) : [];
+    let programCarouselIndex = 0;
 
-    const featuredWorkshopData = [
-      {
-        label: "Featured Conference",
-        title: "Leadership & Social Innovation Conference",
-        text: "Big Red’s conference programming is positioned around leadership, social innovation, and meaningful student interaction. It reflects the site’s emphasis on stronger student voice, action, and perspective.",
-        pills: ["Leadership", "Social impact", "Conference format"]
-      },
-      {
-        label: "Featured Workshop",
-        title: "Ivy League MUNC '26",
-        text: "A diplomacy-driven experience for students who want stronger debate skills, global awareness, and the confidence to participate in high-level discussion.",
-        pills: ["Model UN", "Debate", "Global thinking"]
-      },
-      {
-        label: "Featured Program",
-        title: "InnovateNOW",
-        text: "An innovation-focused experience that encourages students to think creatively, work through real problems, and build sharper solution-first thinking.",
-        pills: ["Innovation", "Problem solving", "Creative thinking"]
-      },
-      {
-        label: "Featured Bootcamp",
-        title: "Social Startup Bootcamp",
-        text: "An entrepreneurial experience built around initiative, purpose-driven ideas, and helping students understand how impact and execution can work together.",
-        pills: ["Entrepreneurship", "Social change", "Initiative"]
-      },
-      {
-        label: "Featured Future-Tech Lab",
-        title: "Command Z: Future Tech Lab",
-        text: "A future-facing program that introduces students to AI, creative technology, trendspotting, and hands-on digital experimentation in an immersive format.",
-        pills: ["AI", "Future tech", "Hands-on learning"]
-      }
-    ];
-
-    let featuredWorkshopIndex = 0;
-
-    function renderFeaturedWorkshop() {
-      if (!featuredWorkshopLabel || !featuredWorkshopTitle || !featuredWorkshopText || !featuredWorkshopPills) {
+    function updateProgramCarousel() {
+      if (!programCarouselTrack || programCards.length === 0) {
         return;
       }
 
-      const current = featuredWorkshopData[featuredWorkshopIndex];
-      featuredWorkshopLabel.textContent = current.label;
-      featuredWorkshopTitle.textContent = current.title;
-      featuredWorkshopText.textContent = current.text;
-      featuredWorkshopPills.innerHTML = current.pills
-        .map((pill) => `<div class="light-pill">${pill}</div>`)
-        .join("");
+      programCards.forEach((card, index) => {
+        card.classList.toggle("is-active", index === programCarouselIndex);
+      });
+
+      const cardWidth = programCards[0].offsetWidth;
+      const gap = 16;
+      programCarouselTrack.style.transform = `translateX(-${programCarouselIndex * (cardWidth + gap)}px)`;
     }
 
-    setInterval(() => {
-      if (!featuredWorkshopCopy) {
-        featuredWorkshopIndex = (featuredWorkshopIndex + 1) % featuredWorkshopData.length;
-        renderFeaturedWorkshop();
-        return;
-      }
+    if (programCards.length > 0) {
+      updateProgramCarousel();
+      window.addEventListener("resize", updateProgramCarousel);
 
-      featuredWorkshopCopy.classList.add("is-switching");
-
-      window.setTimeout(() => {
-        featuredWorkshopIndex = (featuredWorkshopIndex + 1) % featuredWorkshopData.length;
-        renderFeaturedWorkshop();
-        featuredWorkshopCopy.classList.remove("is-switching");
-      }, 260);
-    }, 5000);
+      window.setInterval(() => {
+        programCarouselIndex = (programCarouselIndex + 1) % programCards.length;
+        updateProgramCarousel();
+      }, 2800);
+    }
 
     const reveals = document.querySelectorAll(".reveal");
     reveals.forEach((item, index) => {

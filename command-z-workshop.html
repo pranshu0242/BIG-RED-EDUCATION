@@ -27,7 +27,6 @@
       --radius-xl: 34px;
       --radius-lg: 24px;
       --radius-md: 18px;
-      --container: 1260px;
     }
 
     * {
@@ -69,8 +68,9 @@
     }
 
     .container {
-      width: min(calc(100% - 28px), var(--container));
-      margin: 0 auto;
+      width: 100%;
+      max-width: none;
+      margin: 0;
     }
 
     .site-header {
@@ -88,6 +88,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
+      padding: 0 24px;
     }
 
     .brand {
@@ -154,11 +155,11 @@
     }
 
     .page-shell {
-      padding: 26px 0 52px;
+      padding: 18px 0 52px;
     }
 
     .workshop-marquee {
-      padding: 14px 0 0;
+      padding: 12px 24px 0;
     }
 
     .workshop-marquee-shell {
@@ -221,9 +222,10 @@
 
     .page-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 390px;
-      gap: 22px;
+      grid-template-columns: minmax(0, 1fr) 410px;
+      gap: 18px;
       align-items: start;
+      padding: 0 24px;
     }
 
     .content-column {
@@ -1147,7 +1149,7 @@
     }
 
     .footer {
-      padding: 10px 0 48px;
+      padding: 10px 24px 48px;
     }
 
     .footer-card {
